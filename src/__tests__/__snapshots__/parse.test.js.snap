@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parses let declaration 1`] = `
+Object {
+  "program": Object {
+    "body": Array [
+      Object {
+        "name": "foo",
+        "parent": [Circular],
+        "right": Object {
+          "name": "10",
+          "parent": [Circular],
+          "type": "Identifier",
+        },
+        "type": "LetDeclaration",
+      },
+    ],
+    "type": "Program",
+  },
+}
+`;
+
+exports[`parses type declaration 1`] = `
+Object {
+  "program": Object {
+    "body": Array [
+      Object {
+        "name": "Foo",
+        "parent": [Circular],
+        "type": "TypeDeclaration",
+      },
+      Object {
+        "name": "Bar",
+        "parent": [Circular],
+        "right": Object {
+          "parent": [Circular],
+          "type": "UnionType",
+          "types": Array [
+            Object {
+              "name": "Boolean",
+              "parent": [Circular],
+              "type": "Identifier",
+            },
+            Object {
+              "name": "String",
+              "parent": [Circular],
+              "type": "Identifier",
+            },
+            Object {
+              "name": "Number",
+              "parent": [Circular],
+              "type": "Identifier",
+            },
+          ],
+        },
+        "type": "TypeDeclaration",
+      },
+      Object {
+        "name": "Maybe",
+        "params": Array [
+          Object {
+            "name": "Number",
+            "parent": [Circular],
+            "type": "Identifier",
+          },
+        ],
+        "parent": [Circular],
+        "right": Object {
+          "parent": [Circular],
+          "type": "UnionType",
+          "types": Array [
+            Object {
+              "name": "Nothing",
+              "parent": [Circular],
+              "type": "Identifier",
+            },
+            Object {
+              "name": "Number",
+              "parent": [Circular],
+              "type": "Identifier",
+            },
+          ],
+        },
+        "type": "TypeDeclaration",
+      },
+      Object {
+        "name": "Users",
+        "parent": [Circular],
+        "right": Object {
+          "name": "List",
+          "params": Array [
+            Object {
+              "name": "User",
+              "parent": [Circular],
+              "type": "Identifier",
+            },
+          ],
+          "parent": [Circular],
+          "type": "Identifier",
+        },
+        "type": "TypeDeclaration",
+      },
+    ],
+    "type": "Program",
+  },
+}
+`;

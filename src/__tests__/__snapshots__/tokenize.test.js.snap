@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tokenizes let declaration 1`] = `
+Array [
+  Object {
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "type": "let",
+    "value": "a",
+  },
+  Object {
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "type": "identifier",
+    "value": "10;",
+  },
+]
+`;
+
+exports[`tokenizes type declaration 1`] = `
+Array [
+  Object {
+    "type": "keyword",
+    "value": "type",
+  },
+  Object {
+    "type": "type",
+    "value": "Foo",
+  },
+  Object {
+    "type": "keyword",
+    "value": "type",
+  },
+  Object {
+    "type": "type",
+    "value": "Bar",
+  },
+  Object {
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "type": "identifier",
+    "value": "Boolean",
+  },
+  Object {
+    "type": "operator",
+    "value": "|",
+  },
+  Object {
+    "type": "identifier",
+    "value": "String",
+  },
+  Object {
+    "type": "operator",
+    "value": "|",
+  },
+  Object {
+    "type": "identifier",
+    "value": "Number",
+  },
+  Object {
+    "type": "keyword",
+    "value": "type",
+  },
+  Object {
+    "type": "type",
+    "value": "Maybe",
+  },
+  Object {
+    "type": "identifier",
+    "value": "Number",
+  },
+  Object {
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "type": "identifier",
+    "value": "Nothing",
+  },
+  Object {
+    "type": "operator",
+    "value": "|",
+  },
+  Object {
+    "type": "identifier",
+    "value": "Number",
+  },
+  Object {
+    "type": "keyword",
+    "value": "type",
+  },
+  Object {
+    "type": "type",
+    "value": "Users",
+  },
+  Object {
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "type": "identifier",
+    "value": "List",
+  },
+  Object {
+    "type": "identifier",
+    "value": "User",
+  },
+]
+`;

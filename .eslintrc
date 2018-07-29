@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "extends": "eslint-config-satya164",
+
+  "env": {
+    "es6": true,
+    "node": true,
+  },
+
+  "rules": {
+    "import/no-commonjs": "off"
+  }
+}
