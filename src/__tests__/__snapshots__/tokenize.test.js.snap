@@ -3,20 +3,60 @@
 exports[`tokenizes let declaration 1`] = `
 Array [
   Object {
+    "loc": Object {
+      "column": 0,
+      "line": 0,
+    },
     "type": "keyword",
     "value": "let",
   },
   Object {
-    "type": "let",
+    "loc": Object {
+      "column": 3,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 0,
+    },
+    "type": "identifier",
     "value": "a",
   },
   Object {
+    "loc": Object {
+      "column": 5,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 0,
+    },
     "type": "operator",
     "value": "=",
   },
   Object {
-    "type": "identifier",
-    "value": "10;",
+    "loc": Object {
+      "column": 7,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 0,
+    },
+    "type": "number",
+    "value": "10",
   },
 ]
 `;
@@ -24,90 +64,349 @@ Array [
 exports[`tokenizes type declaration 1`] = `
 Array [
   Object {
+    "loc": Object {
+      "column": 0,
+      "line": 0,
+    },
     "type": "keyword",
     "value": "type",
   },
   Object {
-    "type": "type",
+    "loc": Object {
+      "column": 4,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 0,
+    },
+    "type": "identifier",
     "value": "Foo",
   },
   Object {
+    "loc": Object {
+      "column": 8,
+      "line": 0,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 1,
+    },
     "type": "keyword",
     "value": "type",
   },
   Object {
-    "type": "type",
+    "loc": Object {
+      "column": 5,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 1,
+    },
+    "type": "identifier",
     "value": "Bar",
   },
   Object {
+    "loc": Object {
+      "column": 9,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 1,
+    },
     "type": "operator",
     "value": "=",
   },
   Object {
+    "loc": Object {
+      "column": 11,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 1,
+    },
     "type": "identifier",
     "value": "Boolean",
   },
   Object {
+    "loc": Object {
+      "column": 19,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 20,
+      "line": 1,
+    },
     "type": "operator",
     "value": "|",
   },
   Object {
+    "loc": Object {
+      "column": 21,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 22,
+      "line": 1,
+    },
     "type": "identifier",
     "value": "String",
   },
   Object {
+    "loc": Object {
+      "column": 28,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 29,
+      "line": 1,
+    },
     "type": "operator",
     "value": "|",
   },
   Object {
+    "loc": Object {
+      "column": 30,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 31,
+      "line": 1,
+    },
     "type": "identifier",
     "value": "Number",
   },
   Object {
+    "loc": Object {
+      "column": 37,
+      "line": 1,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 2,
+    },
     "type": "keyword",
     "value": "type",
   },
   Object {
-    "type": "type",
+    "loc": Object {
+      "column": 5,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 2,
+    },
+    "type": "identifier",
     "value": "Maybe",
   },
   Object {
+    "loc": Object {
+      "column": 11,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 2,
+    },
     "type": "identifier",
     "value": "Number",
   },
   Object {
+    "loc": Object {
+      "column": 18,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 19,
+      "line": 2,
+    },
     "type": "operator",
     "value": "=",
   },
   Object {
+    "loc": Object {
+      "column": 20,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 21,
+      "line": 2,
+    },
     "type": "identifier",
     "value": "Nothing",
   },
   Object {
+    "loc": Object {
+      "column": 28,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 29,
+      "line": 2,
+    },
     "type": "operator",
     "value": "|",
   },
   Object {
+    "loc": Object {
+      "column": 30,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 31,
+      "line": 2,
+    },
     "type": "identifier",
     "value": "Number",
   },
   Object {
+    "loc": Object {
+      "column": 37,
+      "line": 2,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 3,
+    },
     "type": "keyword",
     "value": "type",
   },
   Object {
-    "type": "type",
+    "loc": Object {
+      "column": 5,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 3,
+    },
+    "type": "identifier",
     "value": "Users",
   },
   Object {
+    "loc": Object {
+      "column": 11,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 3,
+    },
     "type": "operator",
     "value": "=",
   },
   Object {
+    "loc": Object {
+      "column": 13,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 14,
+      "line": 3,
+    },
     "type": "identifier",
     "value": "List",
   },
   Object {
+    "loc": Object {
+      "column": 18,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 19,
+      "line": 3,
+    },
     "type": "identifier",
     "value": "User",
   },

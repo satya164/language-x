@@ -8,6 +8,7 @@
   },
 
   "rules": {
-    "import/no-commonjs": "off"
+    "import/no-commonjs": "off",
+    "flowtype/no-primitive-constructor-types": "off"
   }
 }

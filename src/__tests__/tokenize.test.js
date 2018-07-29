@@ -1,10 +1,11 @@
 /* @flow */
 
+const dedent = require('dedent');
 const tokenize = require('../tokenize');
 
 it('tokenizes type declaration', () => {
   expect(
-    tokenize(`
+    tokenize(dedent`
     type Foo
     type Bar = Boolean | String | Number
     type Maybe Number = Nothing | Number
@@ -15,8 +16,8 @@ it('tokenizes type declaration', () => {
 
 it('tokenizes let declaration', () => {
   expect(
-    tokenize(`
-    let a = 10;
+    tokenize(dedent`
+    let a = 10
   `)
   ).toMatchSnapshot();
 });
