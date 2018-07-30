@@ -4,7 +4,7 @@ exports[`tokenizes let declaration 1`] = `
 Array [
   Object {
     "loc": Object {
-      "column": 0,
+      "column": 1,
       "line": 0,
     },
     "type": "keyword",
@@ -12,7 +12,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 3,
+      "column": 4,
       "line": 0,
     },
     "type": "whitespace",
@@ -20,11 +20,312 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 4,
+      "column": 5,
       "line": 0,
     },
     "type": "identifier",
     "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 0,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 0,
+    },
+    "type": "number",
+    "value": "10",
+  },
+]
+`;
+
+exports[`tokenizes strings 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 0,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 0,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 0,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 0,
+    },
+    "type": "string",
+    "value": "Hello world",
+  },
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 1,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 1,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 1,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 1,
+    },
+    "type": "string",
+    "value": "Numbers in strings +0.30",
+  },
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 2,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 2,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 2,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 2,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 2,
+    },
+    "type": "string",
+    "value": "Operators in string (= | + - /)",
+  },
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 3,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 3,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 3,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 3,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 3,
+    },
+    "type": "string",
+    "value": "Keywords such as let in string",
+  },
+]
+`;
+
+exports[`tokenizes type declaration 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 0,
+    },
+    "type": "keyword",
+    "value": "type",
   },
   Object {
     "loc": Object {
@@ -39,58 +340,13 @@ Array [
       "column": 6,
       "line": 0,
     },
-    "type": "operator",
-    "value": "=",
-  },
-  Object {
-    "loc": Object {
-      "column": 7,
-      "line": 0,
-    },
-    "type": "whitespace",
-    "value": " ",
-  },
-  Object {
-    "loc": Object {
-      "column": 8,
-      "line": 0,
-    },
-    "type": "number",
-    "value": "10",
-  },
-]
-`;
-
-exports[`tokenizes type declaration 1`] = `
-Array [
-  Object {
-    "loc": Object {
-      "column": 0,
-      "line": 0,
-    },
-    "type": "keyword",
-    "value": "type",
-  },
-  Object {
-    "loc": Object {
-      "column": 4,
-      "line": 0,
-    },
-    "type": "whitespace",
-    "value": " ",
-  },
-  Object {
-    "loc": Object {
-      "column": 5,
-      "line": 0,
-    },
     "type": "identifier",
     "value": "Foo",
   },
   Object {
     "loc": Object {
-      "column": 8,
-      "line": 0,
+      "column": 0,
+      "line": 1,
     },
     "type": "newline",
     "value": "
@@ -218,8 +474,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 37,
-      "line": 1,
+      "column": 0,
+      "line": 2,
     },
     "type": "newline",
     "value": "
@@ -331,8 +587,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 37,
-      "line": 2,
+      "column": 0,
+      "line": 3,
     },
     "type": "newline",
     "value": "
@@ -417,7 +673,7 @@ exports[`tokenizes various types of numbers 1`] = `
 Array [
   Object {
     "loc": Object {
-      "column": 0,
+      "column": 1,
       "line": 0,
     },
     "type": "keyword",
@@ -425,7 +681,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 3,
+      "column": 4,
       "line": 0,
     },
     "type": "whitespace",
@@ -433,7 +689,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 4,
+      "column": 5,
       "line": 0,
     },
     "type": "identifier",
@@ -441,7 +697,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 5,
+      "column": 6,
       "line": 0,
     },
     "type": "whitespace",
@@ -449,7 +705,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 6,
+      "column": 7,
       "line": 0,
     },
     "type": "operator",
@@ -457,7 +713,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 7,
+      "column": 8,
       "line": 0,
     },
     "type": "whitespace",
@@ -465,7 +721,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 8,
+      "column": 9,
       "line": 0,
     },
     "type": "number",
@@ -473,8 +729,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 10,
-      "line": 0,
+      "column": 0,
+      "line": 1,
     },
     "type": "newline",
     "value": "
@@ -538,8 +794,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 14,
-      "line": 1,
+      "column": 0,
+      "line": 2,
     },
     "type": "newline",
     "value": "
@@ -603,8 +859,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 12,
-      "line": 2,
+      "column": 0,
+      "line": 3,
     },
     "type": "newline",
     "value": "
@@ -668,8 +924,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 12,
-      "line": 3,
+      "column": 0,
+      "line": 4,
     },
     "type": "newline",
     "value": "
@@ -733,8 +989,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 12,
-      "line": 4,
+      "column": 0,
+      "line": 5,
     },
     "type": "newline",
     "value": "
@@ -798,8 +1054,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 13,
-      "line": 5,
+      "column": 0,
+      "line": 6,
     },
     "type": "newline",
     "value": "
@@ -863,8 +1119,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 13,
-      "line": 6,
+      "column": 0,
+      "line": 7,
     },
     "type": "newline",
     "value": "
@@ -928,8 +1184,8 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 14,
-      "line": 7,
+      "column": 0,
+      "line": 8,
     },
     "type": "newline",
     "value": "

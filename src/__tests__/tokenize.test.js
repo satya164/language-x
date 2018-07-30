@@ -37,3 +37,14 @@ it('tokenizes various types of numbers', () => {
   `)
   ).toMatchSnapshot();
 });
+
+it('tokenizes strings', () => {
+  expect(
+    tokenize(dedent`
+    let a = "Hello world"
+    let a = "Numbers in strings +0.30"
+    let a = "Operators in string (= | + - /)"
+    let a = "Keywords such as let in string"
+  `)
+  ).toMatchSnapshot();
+});

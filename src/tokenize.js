@@ -71,8 +71,43 @@ module.exports = function tokenize(code: string): Token[] {
   let line = 0;
   let column = 0;
 
+  let string = false;
+
   for (let i = 0, l = code.length; i < l; i++) {
     let char = code.charAt(i);
+
+    if (char === '\n') {
+      line++;
+      column = 0;
+    } else {
+      column++;
+    }
+
+    const last = tokens[tokens.length - 1];
+
+    if (char === '"') {
+      // This could be open or closing of a string
+      // TODO: handle escaping and interpolating
+      if (string) {
+        string = false;
+      } else {
+        string = true;
+        tokens.push({
+          type: 'string',
+          value: char,
+          loc: { line, column },
+        });
+      }
+
+      continue;
+    }
+
+    if (string) {
+      // We want to skip tokenizing if it's a string
+      last.value += char;
+
+      continue;
+    }
 
     switch (char) {
       case '\n':
@@ -81,8 +116,28 @@ module.exports = function tokenize(code: string): Token[] {
           value: char,
           loc: { line, column },
         });
-        line++;
-        column = 0;
+        break;
+      case '\t':
+      case ' ':
+        // Check for whitespace
+        if (
+          last &&
+          last.type === 'identifier' &&
+          keywords.includes(last.value)
+        ) {
+          /* $FlowFixMe */
+          last.type = 'keyword';
+        }
+
+        if (last && last.type === 'whitespace') {
+          last.value += char;
+        } else {
+          tokens.push({
+            type: 'whitespace',
+            value: char,
+            loc: { line, column },
+          });
+        }
         break;
       case '|':
       case '=':
@@ -118,8 +173,6 @@ module.exports = function tokenize(code: string): Token[] {
       }
       default:
         {
-          const last = tokens[tokens.length - 1];
-
           if (/[_a-zA-Z]/.test(char)) {
             // Check for identifiers and keywords
             if (last && last.type === 'identifier') {
@@ -131,7 +184,7 @@ module.exports = function tokenize(code: string): Token[] {
                 loc: { line, column },
               });
             }
-          } else if (/\d/i.test(char) || char === '.') {
+          } else if (/\d/.test(char) || char === '.') {
             // Check for numbers
             if (last && last.type === 'number') {
               last.value += char;
@@ -142,34 +195,12 @@ module.exports = function tokenize(code: string): Token[] {
                 loc: { line, column },
               });
             }
-          } else if (/(\s|\t)/i.test(char)) {
-            // Check for whitespace
-            if (
-              last &&
-              last.type === 'identifier' &&
-              keywords.includes(last.value)
-            ) {
-              /* $FlowFixMe */
-              last.type = 'keyword';
-            }
-
-            if (last && last.type === 'whitespace') {
-              last.value += char;
-            } else {
-              tokens.push({
-                type: 'whitespace',
-                value: char,
-                loc: { line, column },
-              });
-            }
           } else {
             throw new Error(`Unhandled character "${char}"`);
           }
         }
         break;
     }
-
-    column++;
   }
 
   return tokens;
