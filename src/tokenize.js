@@ -13,7 +13,7 @@ type Keyword = {
 
 type Operator = {
   type: 'operator',
-  value: '=' | '|',
+  value: '|' | '=' | '+' | '-' | '*' | '/',
   loc: Location,
 };
 
@@ -84,19 +84,43 @@ module.exports = function tokenize(code: string): Token[] {
         line++;
         column = 0;
         break;
-      case '=':
       case '|':
+      case '=':
+      case '*':
+      case '/':
         tokens.push({
           type: 'operator',
           value: char,
           loc: { line, column },
         });
         break;
+      case '+':
+      case '-': {
+        // We need to lookahead to determine if it's a number or an operation
+        const next = code.charAt(i + 1);
+
+        if (next === '.' || /\d/.test(next)) {
+          // It's a float or integer
+          tokens.push({
+            type: 'number',
+            value: char,
+            loc: { line, column },
+          });
+        } else {
+          tokens.push({
+            type: 'operator',
+            value: char,
+            loc: { line, column },
+          });
+        }
+
+        break;
+      }
       default:
         {
           const last = tokens[tokens.length - 1];
 
-          if (/[a-z]/i.test(char)) {
+          if (/[_a-zA-Z]/.test(char)) {
             // Check for identifiers and keywords
             if (last && last.type === 'identifier') {
               last.value += char;
@@ -107,7 +131,7 @@ module.exports = function tokenize(code: string): Token[] {
                 loc: { line, column },
               });
             }
-          } else if (/[0-9]/i.test(char)) {
+          } else if (/\d/i.test(char) || char === '.') {
             // Check for numbers
             if (last && last.type === 'number') {
               last.value += char;

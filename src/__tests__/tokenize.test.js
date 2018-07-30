@@ -21,3 +21,19 @@ it('tokenizes let declaration', () => {
   `)
   ).toMatchSnapshot();
 });
+
+it('tokenizes various types of numbers', () => {
+  expect(
+    tokenize(dedent`
+    let a = 10
+    let a = 10.30
+    let a = +10
+    let a = -10
+    let a = .30
+    let a = +.30
+    let a = -.30
+    let a = +0.30
+    let a = -0.30
+  `)
+  ).toMatchSnapshot();
+});

@@ -412,3 +412,584 @@ Array [
   },
 ]
 `;
+
+exports[`tokenizes various types of numbers 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 0,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 3,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 0,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 0,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 0,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 0,
+    },
+    "type": "number",
+    "value": "10",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 0,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 1,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 1,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 1,
+    },
+    "type": "number",
+    "value": "10.30",
+  },
+  Object {
+    "loc": Object {
+      "column": 14,
+      "line": 1,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 2,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 2,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 2,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 2,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 2,
+    },
+    "type": "number",
+    "value": "+10",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 2,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 3,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 3,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 3,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 3,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 3,
+    },
+    "type": "number",
+    "value": "-10",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 3,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 4,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 4,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 4,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 4,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 4,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 4,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 4,
+    },
+    "type": "number",
+    "value": ".30",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 4,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 5,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 5,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 5,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 5,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 5,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 5,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 5,
+    },
+    "type": "number",
+    "value": "+.30",
+  },
+  Object {
+    "loc": Object {
+      "column": 13,
+      "line": 5,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 6,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 6,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 6,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 6,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 6,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 6,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 6,
+    },
+    "type": "number",
+    "value": "-.30",
+  },
+  Object {
+    "loc": Object {
+      "column": 13,
+      "line": 6,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 7,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 7,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 7,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 7,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 7,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 7,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 7,
+    },
+    "type": "number",
+    "value": "+0.30",
+  },
+  Object {
+    "loc": Object {
+      "column": 14,
+      "line": 7,
+    },
+    "type": "newline",
+    "value": "
+",
+  },
+  Object {
+    "loc": Object {
+      "column": 1,
+      "line": 8,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 8,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 8,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 8,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 7,
+      "line": 8,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 8,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 8,
+    },
+    "type": "number",
+    "value": "-0.30",
+  },
+]
+`;
