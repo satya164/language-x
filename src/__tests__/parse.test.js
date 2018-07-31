@@ -112,6 +112,21 @@ it('parses function declaration', () => {
     fun foo = bar | baz
     `)
   ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    fun foo = {
+    `)
+  ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    fun foo = {
+      let a = 3 + 7
+
+      return a
+    `)
+  ).toThrowErrorMatchingSnapshot();
 });
 
 it('parses math expression', () => {

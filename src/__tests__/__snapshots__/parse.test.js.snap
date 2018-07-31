@@ -108,6 +108,10 @@ exports[`parses function declaration 3`] = `"Expected AssignmentExpression, but 
 
 exports[`parses function declaration 4`] = `"Expected Identifier or InstantiationExpression or MathExpression or StringLiteral or NumericLiteral or BlockStatement, but got UnionOperation"`;
 
+exports[`parses function declaration 5`] = `"Syntax error: unexpected end of block at 1:10"`;
+
+exports[`parses function declaration 6`] = `"Syntax error: unexpected end of block at 1:10"`;
+
 exports[`parses let declaration 1`] = `
 Node "Program" (1:0)
   body: Array [
@@ -153,9 +157,21 @@ Node "Program" (1:0)
   ]
 `;
 
-exports[`parses main declaration 3`] = `"Syntax error: duplicate keyword \\"main\\" at 2:0"`;
+exports[`parses main declaration 3`] = `
+Node "Program" (1:0)
+  body: Array [
+    Node "MainDeclaration" (1:0)
+      value: Node "InstantiationExpression" (1:5)
+        id: Node "Identifier" (1:5)
+          name: "Foo"
+        params: Array [
+          Node "Identifier" (1:9)
+            name: "Bar",
+        ],
+  ]
+`;
 
-exports[`parses main declaration 4`] = `"Expected Identifier or InstantiationExpression, but got AssignmentExpression"`;
+exports[`parses main declaration 4`] = `"Syntax error: duplicate keyword \\"main\\" at 2:0"`;
 
 exports[`parses main declaration 5`] = `"Expected Identifier or InstantiationExpression, but got AssignmentExpression"`;
 

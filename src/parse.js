@@ -19,6 +19,13 @@ const {
   NumericLiteral,
 } = require('./types');
 
+const eof = token =>
+  new Error(
+    `Syntax error: unexpected end of block at ${token.loc.line}:${
+      token.loc.column
+    }`
+  );
+
 const error = token =>
   new Error(
     `Syntax error: unexpected ${token.type} "${token.value}" at ${
@@ -75,6 +82,10 @@ const statement = (token, peek, back) => {
       body.push(statement(next, peek, back));
 
       next = peek();
+    }
+
+    if (!next || !(next.type === 'braces' && next.value === '}')) {
+      throw eof(token);
     }
 
     return BlockStatement.create({ body }, token.loc);
