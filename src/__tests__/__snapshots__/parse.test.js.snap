@@ -157,6 +157,8 @@ exports[`parses main declaration 3`] = `"Syntax error: duplicate keyword \\"main
 
 exports[`parses main declaration 4`] = `"Expected Identifier or InstantiationExpression, but got AssignmentExpression"`;
 
+exports[`parses main declaration 5`] = `"Expected Identifier or InstantiationExpression, but got AssignmentExpression"`;
+
 exports[`parses math expression 1`] = `
 Node "Program" (1:0)
   body: Array [

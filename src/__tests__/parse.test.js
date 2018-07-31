@@ -22,6 +22,12 @@ it('parses main declaration', () => {
     `)
   ).toMatchSnapshot();
 
+  expect(
+    parse(dedent`
+    main Foo Bar
+    `)
+  ).toMatchSnapshot();
+
   expect(() =>
     parse(dedent`
     main Foo

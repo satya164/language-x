@@ -21,7 +21,7 @@ const {
 module.exports = function compile(node: *) {
   switch (node.type) {
     case Program.name:
-      return node.body.map(compile).join('\n\n');
+      return `'use strict';\n\n${node.body.map(compile).join('\n\n')}`;
 
     case MainDeclaration.name:
       return compile(node.value);

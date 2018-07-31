@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`compiles program to JavaScript 1`] = `
-"var a = 10 * 30 + b - 20 / foo;
+"'use strict';
+
+var a = 10 * 30 + b - 20 / foo;
 
 var b = \\"Hello world\\";
 
