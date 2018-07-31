@@ -84,8 +84,11 @@ const expression = (token, peek, end) => {
         ? ParameterExpression.create({ id: expr, params: [] }, token.loc)
         : expr;
 
-      /* $FlowFixMe */
-      expr.params.push(Identifier.create({ name: next.value }, next.loc));
+      if (ParameterExpression.check(expr)) {
+        expr.params.push(Identifier.create({ name: next.value }, next.loc));
+      } else {
+        throw error(next);
+      }
 
       next = peek();
     }
@@ -97,7 +100,11 @@ const expression = (token, peek, end) => {
         ? ParameterExpression.create({ id: expr, params: [] }, token.loc)
         : expr;
 
-      expr.params.push(expression(next, peek, end));
+      if (ParameterExpression.check(expr)) {
+        expr.params.push(expression(next, peek, end));
+      } else {
+        throw error(next);
+      }
     } else if (next && next.type === 'operator') {
       if (next.value === '=') {
         // If we encounter the assignment operator, assume assignment expression

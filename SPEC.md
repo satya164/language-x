@@ -25,7 +25,7 @@ let bar = "Hello world"
 Functions are defined with the `func` keyword:
 
 ```
-func add a b => a + b
+func add a b = a + b
 ```
 
 Functions can be called like:

@@ -43,8 +43,25 @@ Array [
         Node "Identifier" (2:21)
           name: "a",
       ],
+  Node "FunctionDeclaration" (3:0)
+  value: Node "AssignmentExpression" (3:5)
+    left: Node "Identifier" (3:5)
+      name: "foo"
+    right: Node "ParameterExpression" (3:11)
+      id: Node "Identifier" (3:11)
+        name: "show"
+      params: Array [
+        Node "StringLiteral" (3:16)
+          value: "\\"hello world",
+      ],
 ]
 `;
+
+exports[`parses function declaration 2`] = `"Syntax error: expected Identifier or ParameterExpression, but got StringLiteral"`;
+
+exports[`parses function declaration 3`] = `"Syntax error: unexpected identifier \\"test\\" at 1:30"`;
+
+exports[`parses function declaration 4`] = `"Syntax error: expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
 
 exports[`parses let declaration 1`] = `
 Array [
@@ -62,6 +79,10 @@ Array [
       value: "\\"Hello world",
 ]
 `;
+
+exports[`parses let declaration 2`] = `"Syntax error: expected Identifier, but got ParameterExpression"`;
+
+exports[`parses let declaration 3`] = `"Syntax error: expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
 
 exports[`parses main declaration 1`] = `
 Array [
@@ -104,7 +125,7 @@ Array [
         operator: "+"
         right: Node "MathExpression" (1:18)
           left: Node "Identifier" (1:18)
-            name: "a"
+            name: "b"
           operator: "-"
           right: Node "MathExpression" (1:22)
             left: Node "NumericLiteral" (1:22)
@@ -135,6 +156,10 @@ Array [
           name: "String",
         Node "Identifier" (2:30)
           name: "Number",
+        Node "StringLiteral" (2:39)
+          value: "\\"foo",
+        Node "NumericLiteral" (2:47)
+          value: 42,
       ],
   Node "TypeDeclaration" (3:0)
   value: Node "AssignmentExpression" (3:5)
@@ -165,3 +190,5 @@ Array [
       ],
 ]
 `;
+
+exports[`parses type declaration 2`] = `"Syntax error: expected Identifier or ParameterExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;

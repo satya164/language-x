@@ -40,11 +40,17 @@ it('parses type declaration', () => {
   expect(
     parse(dedent`
     type Foo = Bar
-    type Bar = Boolean | String | Number
+    type Bar = Boolean | String | Number | "foo" | 42
     type Maybe Number = Nothing | Number
     type Users = List User
     `)
   ).toMatchSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    type Foo = a + b
+    `)
+  ).toThrowErrorMatchingSnapshot();
 });
 
 it('parses let declaration', () => {
@@ -54,6 +60,18 @@ it('parses let declaration', () => {
     let bar = "Hello world"
   `)
   ).toMatchSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    let foo bar = 10
+  `)
+  ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    let foo = bar | baz
+    `)
+  ).toThrowErrorMatchingSnapshot();
 });
 
 it('parses function declaration', () => {
@@ -61,14 +79,33 @@ it('parses function declaration', () => {
     parse(dedent`
     func calc a b c = a + b * c
     func foo a add = add a
+    func foo = show "hello world"
   `)
   ).toMatchSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    func foo "hello world" = show test
+    `)
+  ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    func foo = show "hello world" test
+    `)
+  ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    func foo = bar | baz
+    `)
+  ).toThrowErrorMatchingSnapshot();
 });
 
 it('parses math expression', () => {
   expect(
     parse(dedent`
-    let a = 10 * 30 + a - 20 / foo
+    let a = 10 * 30 + b - 20 / foo
   `)
   ).toMatchSnapshot();
 });
