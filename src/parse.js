@@ -33,71 +33,65 @@ const error = token =>
     }:${token.loc.column}`
   );
 
-const statement = (token, peek, back) => {
-  if (token && token.type === 'keyword') {
-    switch (token.value) {
-      case 'main':
-        return MainDeclaration.create(
-          { value: expression(peek(), peek, back) },
-          token.loc
-        );
-
-      case 'type':
-        return TypeDeclaration.create(
-          { value: expression(peek(), peek, back) },
-          token.loc
-        );
-
-      case 'let':
-        return LetDeclaration.create(
-          { value: expression(peek(), peek, back) },
-          token.loc
-        );
-
-      case 'fun':
-        return FunctionDeclaration.create(
-          { value: expression(peek(), peek, back) },
-          token.loc
-        );
-
-      case 'return':
-        return ReturnStatement.create(
-          { value: expression(peek(), peek, back) },
-          token.loc
-        );
-
-      default:
-        throw error(token);
-    }
-  } else if (token && token.type === 'braces' && token.value === '{') {
-    const body = [];
-
-    let next = peek();
-
-    while (
-      next &&
-      next.type === 'keyword' &&
-      (next.value === 'type' || next.value === 'let' || next.value === 'return')
-    ) {
-      body.push(statement(next, peek, back));
-
-      next = peek();
-    }
-
-    if (!next || !(next.type === 'braces' && next.value === '}')) {
-      throw eof(token);
-    }
-
-    return BlockStatement.create({ body }, token.loc);
-  } else if (token) {
-    throw error(token);
-  }
-};
-
 const expression = (token, peek, back) => {
   if (token) {
-    if (token.type === 'braces') {
-      return statement(token, peek, back);
+    if (token.type === 'keyword') {
+      switch (token.value) {
+        case 'main':
+          return MainDeclaration.create(
+            { value: expression(peek(), peek, back) },
+            token.loc
+          );
+
+        case 'type':
+          return TypeDeclaration.create(
+            { value: expression(peek(), peek, back) },
+            token.loc
+          );
+
+        case 'let':
+          return LetDeclaration.create(
+            { value: expression(peek(), peek, back) },
+            token.loc
+          );
+
+        case 'fun':
+          return FunctionDeclaration.create(
+            { value: expression(peek(), peek, back) },
+            token.loc
+          );
+
+        case 'return':
+          return ReturnStatement.create(
+            { value: expression(peek(), peek, back) },
+            token.loc
+          );
+
+        default:
+          throw error(token);
+      }
+    } else if (token.type === 'braces' && token.value === '{') {
+      const body = [];
+
+      let next = peek();
+
+      while (
+        next &&
+        next.type === 'keyword' &&
+        (next.value === 'type' ||
+          next.value === 'let' ||
+          next.value === 'return')
+      ) {
+        body.push(expression(next, peek, back));
+
+        next = peek();
+      }
+
+      if (!next || !(next.type === 'braces' && next.value === '}')) {
+        throw eof(token);
+      }
+
+      return BlockStatement.create({ body }, token.loc);
     }
 
     // Look at previous token to determine type of the expression
@@ -289,7 +283,7 @@ module.exports = function parse(code: string) {
       main = true;
     }
 
-    body.push(statement(token, peek, back));
+    body.push(expression(token, peek, back));
   }
 
   return Program.create({ body }, { line: 1, column: 0 });
