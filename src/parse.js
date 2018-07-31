@@ -4,6 +4,7 @@ const tokenize = require('./tokenize');
 
 const Identifier = 'Identifier';
 const LetDeclaration = 'LetDeclaration';
+const FunctionDeclaration = 'FunctionDeclaration';
 const TypeDeclaration = 'TypeDeclaration';
 const ParameterExpression = 'ParameterExpression';
 const AssignmentExpression = 'AssignmentExpression';
@@ -27,6 +28,15 @@ const declaration = (token, peek, end) => {
 
       return {
         type: LetDeclaration,
+        value: expr,
+      };
+    }
+
+    if (token.value === 'func') {
+      const expr = expression(peek(), peek, end);
+
+      return {
+        type: FunctionDeclaration,
         value: expr,
       };
     }
@@ -64,7 +74,7 @@ const expression = (token, peek, end) => {
         expr.type === Identifier
           ? {
               type: ParameterExpression,
-              callee: expr,
+              id: expr,
               params: [],
             }
           : expr;

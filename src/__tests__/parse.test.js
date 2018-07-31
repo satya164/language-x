@@ -21,3 +21,12 @@ it('parses let declaration', () => {
   `)
   ).toMatchSnapshot();
 });
+
+it('parses function declaration', () => {
+  expect(
+    parse(`
+    func add a = a
+    func foo a add = add a
+  `)
+  ).toMatchSnapshot();
+});

@@ -1,5 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parses function declaration 1`] = `
+Array [
+  Object {
+    "type": "FunctionDeclaration",
+    "value": Object {
+      "left": Object {
+        "id": Object {
+          "name": "add",
+          "type": "Identifier",
+        },
+        "params": Array [
+          Object {
+            "name": "a",
+            "type": "Identifier",
+          },
+        ],
+        "type": "ParameterExpression",
+      },
+      "right": Object {
+        "name": "a",
+        "type": "Identifier",
+      },
+      "type": "AssignmentExpression",
+    },
+  },
+  Object {
+    "type": "FunctionDeclaration",
+    "value": Object {
+      "left": Object {
+        "id": Object {
+          "name": "foo",
+          "type": "Identifier",
+        },
+        "params": Array [
+          Object {
+            "name": "a",
+            "type": "Identifier",
+          },
+          Object {
+            "name": "add",
+            "type": "Identifier",
+          },
+        ],
+        "type": "ParameterExpression",
+      },
+      "right": Object {
+        "id": Object {
+          "name": "add",
+          "type": "Identifier",
+        },
+        "params": Array [
+          Object {
+            "name": "a",
+            "type": "Identifier",
+          },
+        ],
+        "type": "ParameterExpression",
+      },
+      "type": "AssignmentExpression",
+    },
+  },
+]
+`;
+
 exports[`parses let declaration 1`] = `
 Array [
   Object {
@@ -80,7 +144,7 @@ Array [
     "type": "TypeDeclaration",
     "value": Object {
       "left": Object {
-        "callee": Object {
+        "id": Object {
           "name": "Maybe",
           "type": "Identifier",
         },
@@ -116,7 +180,7 @@ Array [
         "type": "Identifier",
       },
       "right": Object {
-        "callee": Object {
+        "id": Object {
           "name": "List",
           "type": "Identifier",
         },

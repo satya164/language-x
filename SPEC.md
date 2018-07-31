@@ -40,19 +40,15 @@ type User = Record {
 Variables are declared with a `let` keyword:
 
 ```
-let a = 10
+let foo = 10
+
+let bar = "Hello world"
 ```
 
-## Module system
+## Functions
 
-Export a thing:
-
-```
-export let a = 10;
-```
-
-Import certain items:
+Functions are defined with the `func` keyword:
 
 ```
-import './path' exposing { add, subtract as minus }
+func add a b => a + b
 ```
