@@ -8,63 +8,74 @@ const FunctionDeclaration = 'FunctionDeclaration';
 const TypeDeclaration = 'TypeDeclaration';
 const ParameterExpression = 'ParameterExpression';
 const AssignmentExpression = 'AssignmentExpression';
+const MathExpression = 'MathExpression';
 const StringLiteral = 'StringLiteral';
 const NumericLiteral = 'NumericLiteral';
 const UnionOperation = 'UnionOperation';
 
+const error = token =>
+  new Error(
+    `Syntax error: unexpected ${token.type} "${token.value}" at ${
+      token.loc.line
+    }:${token.loc.column}`
+  );
+
 const declaration = (token, peek, end) => {
   if (token && token.type === 'keyword') {
-    if (token.value === 'type') {
-      const expr = expression(peek(), peek, end);
+    switch (token.value) {
+      case 'type': {
+        return {
+          type: TypeDeclaration,
+          value: expression(peek(), peek, end),
+        };
+      }
 
-      return {
-        type: TypeDeclaration,
-        value: expr,
-      };
+      case 'let': {
+        return {
+          type: LetDeclaration,
+          value: expression(peek(), peek, end),
+        };
+      }
+
+      case 'func': {
+        return {
+          type: FunctionDeclaration,
+          value: expression(peek(), peek, end),
+        };
+      }
+
+      default:
+        throw error(token);
     }
-
-    if (token.value === 'let') {
-      const expr = expression(peek(), peek, end);
-
-      return {
-        type: LetDeclaration,
-        value: expr,
-      };
-    }
-
-    if (token.value === 'func') {
-      const expr = expression(peek(), peek, end);
-
-      return {
-        type: FunctionDeclaration,
-        value: expr,
-      };
-    }
+  } else if (token) {
+    throw error(token);
   }
 };
 
 const expression = (token, peek, end) => {
-  if (token && token.type === 'string') {
-    return {
-      type: StringLiteral,
-      value: token.value,
-    };
-  }
-
-  if (token && token.type === 'number') {
-    return {
-      type: NumericLiteral,
-      value: parseFloat(token.value),
-    };
-  }
-
-  if (token && token.type === 'identifier') {
+  if (token) {
     // Lookahead to determine the type of the expression
     let next = peek();
-    let expr = {
-      type: Identifier,
-      name: token.value,
-    };
+    let expr;
+
+    if (token.type === 'string') {
+      expr = {
+        type: StringLiteral,
+        value: token.value,
+      };
+    } else if (token.type === 'number') {
+      expr = {
+        type: NumericLiteral,
+        value: parseFloat(token.value),
+      };
+    } else if (token.type === 'identifier') {
+      expr = {
+        type: Identifier,
+        name: token.value,
+      };
+    } else {
+      throw error(token);
+    }
 
     while (next && next.type === 'identifier') {
       // If the identifier is followed by more identifiers, it's call expression
@@ -79,6 +90,7 @@ const expression = (token, peek, end) => {
             }
           : expr;
 
+      /* $FlowFixMe */
       expr.params.push({
         type: Identifier,
         name: next.value,
@@ -86,6 +98,7 @@ const expression = (token, peek, end) => {
 
       next = peek();
     }
+
     if (next && (next.type === 'string' || next.type === 'number')) {
       // If the identifier is followed by a string ot number, it's call expression
       // Unlike identifiers, these can only be at the end
@@ -98,10 +111,9 @@ const expression = (token, peek, end) => {
             }
           : expr;
 
+      /* $FlowFixMe */
       expr.params.push(expression(next, peek, end));
-    }
-
-    if (next && next.type === 'operator') {
+    } else if (next && next.type === 'operator') {
       if (next.value === '=') {
         // If we encounter the assignment operator, assume assignment expression
         // Assign the current expression to the left side and continue parsing the right side of assignment
@@ -110,16 +122,14 @@ const expression = (token, peek, end) => {
           left: expr,
           right: expression(peek(), peek, end),
         };
-      }
-
-      if (next.value === '|') {
+      } else if (next.value === '|') {
         // If we encounter the union operator, assume union expression
         // Add the current expression to the list of values in the union
         const values = [expr];
 
         next = peek();
 
-        while (next && next.type !== 'operator') {
+        while (next && next.type !== 'operator' && next.type !== 'keyword') {
           // Parse the next expression until we find an operator
           const value = expression(
             next,
@@ -150,6 +160,18 @@ const expression = (token, peek, end) => {
           type: UnionOperation,
           values,
         };
+      } else if (
+        next.value === '/' ||
+        next.value === '*' ||
+        next.value === '+' ||
+        next.value === '-'
+      ) {
+        expr = {
+          type: MathExpression,
+          operator: next.value,
+          left: expr,
+          right: expression(peek(), peek, end),
+        };
       }
     }
 
@@ -159,6 +181,8 @@ const expression = (token, peek, end) => {
     }
 
     return expr;
+  } else if (token) {
+    throw error(token);
   }
 };
 
@@ -179,7 +203,7 @@ module.exports = function parse(code: string) {
       i--;
     };
 
-    body.push(declaration(token, peek, end) || expression(token, peek, end));
+    body.push(declaration(token, peek, end));
   }
 
   return body;

@@ -7,7 +7,7 @@ Array [
     "value": Object {
       "left": Object {
         "id": Object {
-          "name": "add",
+          "name": "calc",
           "type": "Identifier",
         },
         "params": Array [
@@ -15,12 +15,36 @@ Array [
             "name": "a",
             "type": "Identifier",
           },
+          Object {
+            "name": "b",
+            "type": "Identifier",
+          },
+          Object {
+            "name": "c",
+            "type": "Identifier",
+          },
         ],
         "type": "ParameterExpression",
       },
       "right": Object {
-        "name": "a",
-        "type": "Identifier",
+        "left": Object {
+          "name": "a",
+          "type": "Identifier",
+        },
+        "operator": "+",
+        "right": Object {
+          "left": Object {
+            "name": "b",
+            "type": "Identifier",
+          },
+          "operator": "*",
+          "right": Object {
+            "name": "c",
+            "type": "Identifier",
+          },
+          "type": "MathExpression",
+        },
+        "type": "MathExpression",
       },
       "type": "AssignmentExpression",
     },
@@ -90,6 +114,57 @@ Array [
       "right": Object {
         "type": "StringLiteral",
         "value": "\\"Hello world",
+      },
+      "type": "AssignmentExpression",
+    },
+  },
+]
+`;
+
+exports[`parses math expression 1`] = `
+Array [
+  Object {
+    "type": "LetDeclaration",
+    "value": Object {
+      "left": Object {
+        "name": "a",
+        "type": "Identifier",
+      },
+      "right": Object {
+        "left": Object {
+          "type": "NumericLiteral",
+          "value": 10,
+        },
+        "operator": "*",
+        "right": Object {
+          "left": Object {
+            "type": "NumericLiteral",
+            "value": 30,
+          },
+          "operator": "+",
+          "right": Object {
+            "left": Object {
+              "name": "a",
+              "type": "Identifier",
+            },
+            "operator": "-",
+            "right": Object {
+              "left": Object {
+                "type": "NumericLiteral",
+                "value": 20,
+              },
+              "operator": "/",
+              "right": Object {
+                "name": "foo",
+                "type": "Identifier",
+              },
+              "type": "MathExpression",
+            },
+            "type": "MathExpression",
+          },
+          "type": "MathExpression",
+        },
+        "type": "MathExpression",
       },
       "type": "AssignmentExpression",
     },

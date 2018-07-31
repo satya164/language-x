@@ -25,8 +25,16 @@ it('parses let declaration', () => {
 it('parses function declaration', () => {
   expect(
     parse(`
-    func add a = a
+    func calc a b c = a + b * c
     func foo a add = add a
+  `)
+  ).toMatchSnapshot();
+});
+
+it('parses math expression', () => {
+  expect(
+    parse(`
+    let a = 10 * 30 + a - 20 / foo
   `)
   ).toMatchSnapshot();
 });
