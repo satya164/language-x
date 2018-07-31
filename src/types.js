@@ -8,16 +8,15 @@ type Location = {
 const assert = (node, ...types) => {
   if (!types.some(t => t.check(node))) {
     throw new Error(
-      `Syntax error: expected ${types
-        .map(t => t.name)
-        .join(' or ')}, but got ${node && node.type}`
+      `Expected ${types.map(t => t.toString()).join(' or ')}, but got ${node &&
+        node.type}`
     );
   }
 };
 
 const helper = function<T>(type, create: (options: T) => *) {
   return {
-    name: type,
+    toString: () => type,
     check: (node: any) => node && node.type === type,
     create: (options: T, loc: Location) => ({
       ...create(options),
@@ -28,6 +27,10 @@ const helper = function<T>(type, create: (options: T) => *) {
     }),
   };
 };
+
+const Program = helper('Program', ({ body }: { body: Array<*> }) => ({
+  body,
+}));
 
 const Identifier = helper('Identifier', ({ name }: { name: string }) => ({
   name,
@@ -179,6 +182,7 @@ const NumericLiteral = helper(
   })
 );
 
+exports.Program = Program;
 exports.Identifier = Identifier;
 exports.MainDeclaration = MainDeclaration;
 exports.TypeDeclaration = TypeDeclaration;

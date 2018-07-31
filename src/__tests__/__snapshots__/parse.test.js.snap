@@ -1,194 +1,200 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`parses function declaration 1`] = `
-Array [
-  Node "FunctionDeclaration" (1:0)
-  value: Node "AssignmentExpression" (1:5)
-    left: Node "ParameterExpression" (1:5)
-      id: Node "Identifier" (1:5)
-        name: "calc"
-      params: Array [
-        Node "Identifier" (1:10)
-          name: "a",
-        Node "Identifier" (1:12)
-          name: "b",
-        Node "Identifier" (1:14)
-          name: "c",
-      ]
-    right: Node "MathExpression" (1:18)
-      left: Node "Identifier" (1:18)
-        name: "a"
-      operator: "+"
-      right: Node "MathExpression" (1:22)
-        left: Node "Identifier" (1:22)
-          name: "b"
-        operator: "*"
-        right: Node "Identifier" (1:26)
-          name: "c",
-  Node "FunctionDeclaration" (2:0)
-  value: Node "AssignmentExpression" (2:5)
-    left: Node "ParameterExpression" (2:5)
-      id: Node "Identifier" (2:5)
-        name: "foo"
-      params: Array [
-        Node "Identifier" (2:9)
-          name: "a",
-        Node "Identifier" (2:11)
-          name: "add",
-      ]
-    right: Node "ParameterExpression" (2:17)
-      id: Node "Identifier" (2:17)
-        name: "add"
-      params: Array [
-        Node "Identifier" (2:21)
-          name: "a",
-      ],
-  Node "FunctionDeclaration" (3:0)
-  value: Node "AssignmentExpression" (3:5)
-    left: Node "Identifier" (3:5)
-      name: "foo"
-    right: Node "ParameterExpression" (3:11)
-      id: Node "Identifier" (3:11)
-        name: "show"
-      params: Array [
-        Node "StringLiteral" (3:16)
-          value: "\\"hello world",
-      ],
-]
+Node "Program" (1:0)
+  body: Array [
+    Node "FunctionDeclaration" (1:0)
+      value: Node "AssignmentExpression" (1:5)
+        left: Node "ParameterExpression" (1:5)
+          id: Node "Identifier" (1:5)
+            name: "calc"
+          params: Array [
+            Node "Identifier" (1:10)
+              name: "a",
+            Node "Identifier" (1:12)
+              name: "b",
+            Node "Identifier" (1:14)
+              name: "c",
+          ]
+        right: Node "MathExpression" (1:18)
+          left: Node "Identifier" (1:18)
+            name: "a"
+          operator: "+"
+          right: Node "MathExpression" (1:22)
+            left: Node "Identifier" (1:22)
+              name: "b"
+            operator: "*"
+            right: Node "Identifier" (1:26)
+              name: "c",
+    Node "FunctionDeclaration" (2:0)
+      value: Node "AssignmentExpression" (2:5)
+        left: Node "ParameterExpression" (2:5)
+          id: Node "Identifier" (2:5)
+            name: "foo"
+          params: Array [
+            Node "Identifier" (2:9)
+              name: "a",
+            Node "Identifier" (2:11)
+              name: "add",
+          ]
+        right: Node "ParameterExpression" (2:17)
+          id: Node "Identifier" (2:17)
+            name: "add"
+          params: Array [
+            Node "Identifier" (2:21)
+              name: "a",
+          ],
+    Node "FunctionDeclaration" (3:0)
+      value: Node "AssignmentExpression" (3:5)
+        left: Node "Identifier" (3:5)
+          name: "foo"
+        right: Node "ParameterExpression" (3:11)
+          id: Node "Identifier" (3:11)
+            name: "show"
+          params: Array [
+            Node "StringLiteral" (3:16)
+              value: "\\"hello world",
+          ],
+  ]
 `;
 
-exports[`parses function declaration 2`] = `"Syntax error: expected Identifier or ParameterExpression, but got StringLiteral"`;
+exports[`parses function declaration 2`] = `"Expected Identifier or ParameterExpression, but got StringLiteral"`;
 
 exports[`parses function declaration 3`] = `"Syntax error: unexpected identifier \\"test\\" at 1:30"`;
 
-exports[`parses function declaration 4`] = `"Syntax error: expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
+exports[`parses function declaration 4`] = `"Expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
 
 exports[`parses let declaration 1`] = `
-Array [
-  Node "LetDeclaration" (1:0)
-  value: Node "AssignmentExpression" (1:4)
-    left: Node "Identifier" (1:4)
-      name: "foo"
-    right: Node "NumericLiteral" (1:10)
-      value: 10,
-  Node "LetDeclaration" (2:0)
-  value: Node "AssignmentExpression" (2:4)
-    left: Node "Identifier" (2:4)
-      name: "bar"
-    right: Node "StringLiteral" (2:10)
-      value: "\\"Hello world",
-]
+Node "Program" (1:0)
+  body: Array [
+    Node "LetDeclaration" (1:0)
+      value: Node "AssignmentExpression" (1:4)
+        left: Node "Identifier" (1:4)
+          name: "foo"
+        right: Node "NumericLiteral" (1:10)
+          value: 10,
+    Node "LetDeclaration" (2:0)
+      value: Node "AssignmentExpression" (2:4)
+        left: Node "Identifier" (2:4)
+          name: "bar"
+        right: Node "StringLiteral" (2:10)
+          value: "\\"Hello world",
+  ]
 `;
 
-exports[`parses let declaration 2`] = `"Syntax error: expected Identifier, but got ParameterExpression"`;
+exports[`parses let declaration 2`] = `"Expected Identifier, but got ParameterExpression"`;
 
-exports[`parses let declaration 3`] = `"Syntax error: expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
+exports[`parses let declaration 3`] = `"Expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
 
 exports[`parses main declaration 1`] = `
-Array [
-  Node "MainDeclaration" (1:0)
-  value: Node "Identifier" (1:5)
-    name: "Foo",
-]
+Node "Program" (1:0)
+  body: Array [
+    Node "MainDeclaration" (1:0)
+      value: Node "Identifier" (1:5)
+        name: "Foo",
+  ]
 `;
 
 exports[`parses main declaration 2`] = `
-Array [
-  Node "MainDeclaration" (1:0)
-  value: Node "ParameterExpression" (1:5)
-    id: Node "Identifier" (1:5)
-      name: "Foo"
-    params: Array [
-      Node "Identifier" (1:9)
-        name: "Bar",
-    ],
-]
+Node "Program" (1:0)
+  body: Array [
+    Node "MainDeclaration" (1:0)
+      value: Node "ParameterExpression" (1:5)
+        id: Node "Identifier" (1:5)
+          name: "Foo"
+        params: Array [
+          Node "Identifier" (1:9)
+            name: "Bar",
+        ],
+  ]
 `;
 
 exports[`parses main declaration 3`] = `"Syntax error: duplicate keyword \\"main\\" at 2:0"`;
 
-exports[`parses main declaration 4`] = `"Syntax error: expected Identifier or ParameterExpression, but got AssignmentExpression"`;
+exports[`parses main declaration 4`] = `"Expected Identifier or ParameterExpression, but got AssignmentExpression"`;
 
 exports[`parses math expression 1`] = `
-Array [
-  Node "LetDeclaration" (1:0)
-  value: Node "AssignmentExpression" (1:4)
-    left: Node "Identifier" (1:4)
-      name: "a"
-    right: Node "MathExpression" (1:8)
-      left: Node "NumericLiteral" (1:8)
-        value: 10
-      operator: "*"
-      right: Node "MathExpression" (1:13)
-        left: Node "NumericLiteral" (1:13)
-          value: 30
-        operator: "+"
-        right: Node "MathExpression" (1:18)
-          left: Node "Identifier" (1:18)
-            name: "b"
-          operator: "-"
-          right: Node "MathExpression" (1:22)
-            left: Node "NumericLiteral" (1:22)
-              value: 20
-            operator: "/"
-            right: Node "Identifier" (1:27)
-              name: "foo",
-]
+Node "Program" (1:0)
+  body: Array [
+    Node "LetDeclaration" (1:0)
+      value: Node "AssignmentExpression" (1:4)
+        left: Node "Identifier" (1:4)
+          name: "a"
+        right: Node "MathExpression" (1:8)
+          left: Node "NumericLiteral" (1:8)
+            value: 10
+          operator: "*"
+          right: Node "MathExpression" (1:13)
+            left: Node "NumericLiteral" (1:13)
+              value: 30
+            operator: "+"
+            right: Node "MathExpression" (1:18)
+              left: Node "Identifier" (1:18)
+                name: "b"
+              operator: "-"
+              right: Node "MathExpression" (1:22)
+                left: Node "NumericLiteral" (1:22)
+                  value: 20
+                operator: "/"
+                right: Node "Identifier" (1:27)
+                  name: "foo",
+  ]
 `;
 
 exports[`parses type declaration 1`] = `
-Array [
-  Node "TypeDeclaration" (1:0)
-  value: Node "AssignmentExpression" (1:5)
-    left: Node "Identifier" (1:5)
-      name: "Foo"
-    right: Node "Identifier" (1:11)
-      name: "Bar",
-  Node "TypeDeclaration" (2:0)
-  value: Node "AssignmentExpression" (2:5)
-    left: Node "Identifier" (2:5)
-      name: "Bar"
-    right: Node "UnionOperation" (2:11)
-      values: Array [
-        Node "Identifier" (2:11)
-          name: "Boolean",
-        Node "Identifier" (2:21)
-          name: "String",
-        Node "Identifier" (2:30)
-          name: "Number",
-        Node "StringLiteral" (2:39)
-          value: "\\"foo",
-        Node "NumericLiteral" (2:47)
-          value: 42,
-      ],
-  Node "TypeDeclaration" (3:0)
-  value: Node "AssignmentExpression" (3:5)
-    left: Node "ParameterExpression" (3:5)
-      id: Node "Identifier" (3:5)
-        name: "Maybe"
-      params: Array [
-        Node "Identifier" (3:11)
-          name: "Number",
-      ]
-    right: Node "UnionOperation" (3:20)
-      values: Array [
-        Node "Identifier" (3:20)
-          name: "Nothing",
-        Node "Identifier" (3:30)
-          name: "Number",
-      ],
-  Node "TypeDeclaration" (4:0)
-  value: Node "AssignmentExpression" (4:5)
-    left: Node "Identifier" (4:5)
-      name: "Users"
-    right: Node "ParameterExpression" (4:13)
-      id: Node "Identifier" (4:13)
-        name: "List"
-      params: Array [
-        Node "Identifier" (4:18)
-          name: "User",
-      ],
-]
+Node "Program" (1:0)
+  body: Array [
+    Node "TypeDeclaration" (1:0)
+      value: Node "AssignmentExpression" (1:5)
+        left: Node "Identifier" (1:5)
+          name: "Foo"
+        right: Node "Identifier" (1:11)
+          name: "Bar",
+    Node "TypeDeclaration" (2:0)
+      value: Node "AssignmentExpression" (2:5)
+        left: Node "Identifier" (2:5)
+          name: "Bar"
+        right: Node "UnionOperation" (2:11)
+          values: Array [
+            Node "Identifier" (2:11)
+              name: "Boolean",
+            Node "Identifier" (2:21)
+              name: "String",
+            Node "Identifier" (2:30)
+              name: "Number",
+            Node "StringLiteral" (2:39)
+              value: "\\"foo",
+            Node "NumericLiteral" (2:47)
+              value: 42,
+          ],
+    Node "TypeDeclaration" (3:0)
+      value: Node "AssignmentExpression" (3:5)
+        left: Node "ParameterExpression" (3:5)
+          id: Node "Identifier" (3:5)
+            name: "Maybe"
+          params: Array [
+            Node "Identifier" (3:11)
+              name: "Number",
+          ]
+        right: Node "UnionOperation" (3:20)
+          values: Array [
+            Node "Identifier" (3:20)
+              name: "Nothing",
+            Node "Identifier" (3:30)
+              name: "Number",
+          ],
+    Node "TypeDeclaration" (4:0)
+      value: Node "AssignmentExpression" (4:5)
+        left: Node "Identifier" (4:5)
+          name: "Users"
+        right: Node "ParameterExpression" (4:13)
+          id: Node "Identifier" (4:13)
+            name: "List"
+          params: Array [
+            Node "Identifier" (4:18)
+              name: "User",
+          ],
+  ]
 `;
 
-exports[`parses type declaration 2`] = `"Syntax error: expected Identifier or ParameterExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;
+exports[`parses type declaration 2`] = `"Expected Identifier or ParameterExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;

@@ -2,17 +2,18 @@
 
 const tokenize = require('./tokenize');
 const {
+  Program,
+  Identifier,
   MainDeclaration,
   TypeDeclaration,
   LetDeclaration,
   FunctionDeclaration,
-  Identifier,
   ParameterExpression,
+  AssignmentExpression,
+  MathExpression,
+  UnionOperation,
   StringLiteral,
   NumericLiteral,
-  AssignmentExpression,
-  UnionOperation,
-  MathExpression,
 } = require('./types');
 
 const error = token =>
@@ -210,5 +211,5 @@ module.exports = function parse(code: string) {
     body.push(declaration(token, peek, end));
   }
 
-  return body;
+  return Program.create({ body }, { line: 1, column: 0 });
 };
