@@ -260,7 +260,7 @@ Array [
       "line": 1,
     },
     "type": "string",
-    "value": "\\"Hello world",
+    "value": "Hello world",
   },
   Object {
     "loc": Object {
@@ -292,7 +292,7 @@ Array [
       "line": 2,
     },
     "type": "string",
-    "value": "\\"Numbers in strings +0.30",
+    "value": "Numbers in strings +0.30",
   },
   Object {
     "loc": Object {
@@ -324,7 +324,7 @@ Array [
       "line": 3,
     },
     "type": "string",
-    "value": "\\"Operators in string (= | + - /)",
+    "value": "Operators in string (= | + - /)",
   },
   Object {
     "loc": Object {
@@ -356,7 +356,7 @@ Array [
       "line": 4,
     },
     "type": "string",
-    "value": "\\"Keywords such as let in string",
+    "value": "Keywords such as let in string",
   },
 ]
 `;

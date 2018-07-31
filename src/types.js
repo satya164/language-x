@@ -8,7 +8,7 @@ type Location = {
 const assert = (node, ...types) => {
   if (!types.some(t => t.check(node))) {
     throw new Error(
-      `Expected ${types.map(t => t.toString()).join(' or ')}, but got ${node &&
+      `Expected ${types.map(t => t.name).join(' or ')}, but got ${node &&
         node.type}`
     );
   }
@@ -16,7 +16,7 @@ const assert = (node, ...types) => {
 
 const helper = function<T>(type, create: (options: T) => *) {
   return {
-    toString: () => type,
+    name: type,
     check: (node: any) => node && node.type === type,
     create: (options: T, loc: Location) => ({
       ...create(options),

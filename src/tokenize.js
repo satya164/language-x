@@ -103,7 +103,7 @@ module.exports = function tokenize(
         string = true;
         tokens.push({
           type: 'string',
-          value: char,
+          value: '',
           loc: { line, column },
         });
       }

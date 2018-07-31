@@ -53,7 +53,7 @@ Node "Program" (1:0)
             name: "show"
           params: Array [
             Node "StringLiteral" (3:15)
-              value: "\\"hello world",
+              value: "hello world",
           ],
   ]
 `;
@@ -122,7 +122,7 @@ Node "Program" (1:0)
         left: Node "Identifier" (2:4)
           name: "bar"
         right: Node "StringLiteral" (2:10)
-          value: "\\"Hello world",
+          value: "Hello world",
   ]
 `;
 
@@ -207,7 +207,7 @@ Node "Program" (1:0)
             Node "Identifier" (2:30)
               name: "Number",
             Node "StringLiteral" (2:39)
-              value: "\\"foo",
+              value: "foo",
             Node "NumericLiteral" (2:47)
               value: 42,
           ],
