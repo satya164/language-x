@@ -2,153 +2,138 @@
 
 const tokenize = require('./tokenize');
 
-const TypeDeclaration = 'TypeDeclaration';
-const LetDeclaration = 'LetDeclaration';
+const Program = 'Program';
 const Identifier = 'Identifier';
-const UnionType = 'UnionType';
+const LetDeclaration = 'LetDeclaration';
+const TypeDeclaration = 'TypeDeclaration';
+const CallExpression = 'CallExpression';
+const AssignmentExpression = 'AssignmentExpression';
+const StringLiteral = 'StringLiteral';
+const NumericLiteral = 'NumericLiteral';
+const UnionOperation = 'UnionOperation';
 
 module.exports = function parse(code: string) {
-  const tokens = tokenize(code);
-  const body = [];
+  const root = {
+    type: Program,
+    body: [],
+    parent: {},
+  };
 
-  let current = body;
+  const tokens = tokenize(code).filter(
+    t => t.type !== 'whitespace' && t.type !== 'newline'
+  );
+
+  let current = root;
+  let assignment = false;
+  let union = false;
 
   for (let i = 0, l = tokens.length; i < l; i++) {
     const token = tokens[i];
 
-    switch (token.type) {
-      case 'keyword': {
-        if (i !== 0) {
-          current = current.parent;
-        }
+    if (token.type === 'keyword') {
+      while (
+        current.parent.type === TypeDeclaration ||
+        current.parent.type === LetDeclaration ||
+        current.parent.type === Program
+      ) {
+        current = current.parent;
+      }
 
-        if (token.value === 'type') {
+      let expr;
+
+      if (token.value === 'type') {
+        expr = {
+          type: TypeDeclaration,
+          parent: current,
+        };
+      } else if (token.value === 'let') {
+        expr = {
+          type: LetDeclaration,
+          parent: current,
+        };
+      } else {
+        throw new Error(`Invalid keyword ${token.value}`);
+      }
+
+      current.body.push(expr);
+      current = expr;
+    } else if (token.type === 'identifier') {
+      if (current.type === TypeDeclaration || current.type === LetDeclaration) {
+        const expr = {
+          type: Identifier,
+          name: token.value,
+          parent: current,
+        };
+
+        current.id = expr;
+        current = expr;
+      } else if (current.type === Identifier) {
+        const expr = {
+          type: Identifier,
+          name: token.value,
+          parent: current,
+        };
+
+        if (assignment) {
+          current.value = expr;
+          current = expr;
+          assignment = false;
+        } else if (union) {
           const expr = {
-            type: TypeDeclaration,
-            parent: current,
+            type: UnionOperation,
+            types: [],
+            parent: current.parent,
           };
 
-          current.push(expr);
+          expr.types.push(
+            {
+              ...current.value,
+              parent: expr,
+            },
+            {
+              type: Identifier,
+              name: token.value,
+              parent: current,
+            }
+          );
+
+          current.value = expr;
           current = expr;
-        } else if (token.value === 'let') {
-          const expr = {
-            type: LetDeclaration,
-            parent: current,
-          };
-
-          current.push(expr);
-          current = expr;
-        }
-
-        break;
-      }
-
-      case 'let': {
-        if (current.type === LetDeclaration) {
-          current.name = token.value;
+          union = false;
         } else {
-          throw new Error('SyntaxError');
-        }
-
-        break;
-      }
-
-      case 'type': {
-        if (current.type === TypeDeclaration) {
-          current.name = token.value;
-        } else {
-          throw new Error('SyntaxError');
-        }
-
-        break;
-      }
-
-      case 'identifier': {
-        if (
-          current.type === TypeDeclaration ||
-          current.type === LetDeclaration ||
-          current.type === Identifier
-        ) {
           current.params = current.params || [];
           current.params.push({
             type: Identifier,
-            parent: current,
             name: token.value,
+            parent: current,
           });
-        } else if (current.type === UnionType) {
+        }
+      } else if (current.type === UnionOperation) {
+        if (union) {
           current.types.push({
             type: Identifier,
-            parent: current,
             name: token.value,
+            parent: current,
           });
-
-          // Lookahead to determine if there are more operators
-          const next = tokens[i + 1];
-
-          if (next && next.type === 'operator' && next.value === '|') {
-            i++;
-          } else {
-            current = current.parent;
-          }
+          union = false;
         } else {
-          throw new Error('SyntaxError');
+          current = current.parent;
         }
-
-        break;
+      }
+    } else if (token.type === 'operator') {
+      if (current.type === Identifier) {
+        while (current.parent.type === Identifier) {
+          current = current.parent;
+        }
       }
 
-      case 'operator': {
-        if (
-          (current.type === TypeDeclaration ||
-            current.type === LetDeclaration) &&
-          token.value === '='
-        ) {
-          // Lookahead to detrmine the type of assignment
-          const next = tokens[i + 1];
-
-          if (next && next.type === 'identifier') {
-            i++;
-
-            const expr = {
-              type: Identifier,
-              name: next.value,
-              parent: current,
-            };
-
-            current.right = expr;
-            current = expr;
-          } else {
-            throw new Error('SyntaxError');
-          }
-        } else if (
-          current.parent.type === TypeDeclaration &&
-          token.value === '|'
-        ) {
-          const expr = {
-            type: UnionType,
-            parent: current.parent,
-            types: [],
-          };
-
-          expr.types.push({ ...current, parent: expr });
-
-          current.parent.right = expr;
-          current = expr;
-        } else {
-          throw new Error('SyntaxError');
-        }
-
-        break;
+      if (token.value === '=') {
+        assignment = true;
+      } else if (token.value === '|') {
+        union = true;
       }
-      default:
-        console.log({ token });
     }
   }
 
-  return {
-    program: {
-      type: 'Program',
-      body,
-    },
-  };
+  return root;
 };

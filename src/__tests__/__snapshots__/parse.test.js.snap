@@ -1,40 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`parses let declaration 1`] = `
-Object {
-  "program": Object {
-    "body": Array [
-      Object {
-        "name": "foo",
-        "parent": [Circular],
-        "right": Object {
-          "name": "10",
-          "parent": [Circular],
-          "type": "Identifier",
-        },
-        "type": "LetDeclaration",
-      },
-    ],
-    "type": "Program",
-  },
-}
-`;
-
 exports[`parses type declaration 1`] = `
 Object {
-  "program": Object {
-    "body": Array [
-      Object {
-        "name": "Foo",
-        "parent": [Circular],
-        "type": "TypeDeclaration",
-      },
-      Object {
+  "body": Array [
+    Object {
+      "id": Object {
         "name": "Bar",
         "parent": [Circular],
-        "right": Object {
+        "type": "Identifier",
+        "value": Object {
           "parent": [Circular],
-          "type": "UnionType",
+          "type": "UnionOperation",
           "types": Array [
             Object {
               "name": "Boolean",
@@ -53,9 +29,12 @@ Object {
             },
           ],
         },
-        "type": "TypeDeclaration",
       },
-      Object {
+      "parent": [Circular],
+      "type": "TypeDeclaration",
+    },
+    Object {
+      "id": Object {
         "name": "Maybe",
         "params": Array [
           Object {
@@ -65,9 +44,10 @@ Object {
           },
         ],
         "parent": [Circular],
-        "right": Object {
+        "type": "Identifier",
+        "value": Object {
           "parent": [Circular],
-          "type": "UnionType",
+          "type": "UnionOperation",
           "types": Array [
             Object {
               "name": "Nothing",
@@ -81,12 +61,16 @@ Object {
             },
           ],
         },
-        "type": "TypeDeclaration",
       },
-      Object {
+      "parent": [Circular],
+      "type": "TypeDeclaration",
+    },
+    Object {
+      "id": Object {
         "name": "Users",
         "parent": [Circular],
-        "right": Object {
+        "type": "Identifier",
+        "value": Object {
           "name": "List",
           "params": Array [
             Object {
@@ -98,10 +82,12 @@ Object {
           "parent": [Circular],
           "type": "Identifier",
         },
-        "type": "TypeDeclaration",
       },
-    ],
-    "type": "Program",
-  },
+      "parent": [Circular],
+      "type": "TypeDeclaration",
+    },
+  ],
+  "parent": Object {},
+  "type": "Program",
 }
 `;

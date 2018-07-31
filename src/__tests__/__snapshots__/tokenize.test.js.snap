@@ -113,11 +113,11 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 10,
+      "column": 9,
       "line": 0,
     },
     "type": "string",
-    "value": "Hello world",
+    "value": "\\"Hello world",
   },
   Object {
     "loc": Object {
@@ -178,11 +178,11 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 10,
+      "column": 9,
       "line": 1,
     },
     "type": "string",
-    "value": "Numbers in strings +0.30",
+    "value": "\\"Numbers in strings +0.30",
   },
   Object {
     "loc": Object {
@@ -243,11 +243,11 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 10,
+      "column": 9,
       "line": 2,
     },
     "type": "string",
-    "value": "Operators in string (= | + - /)",
+    "value": "\\"Operators in string (= | + - /)",
   },
   Object {
     "loc": Object {
@@ -308,11 +308,11 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 10,
+      "column": 9,
       "line": 3,
     },
     "type": "string",
-    "value": "Keywords such as let in string",
+    "value": "\\"Keywords such as let in string",
   },
 ]
 `;
@@ -341,45 +341,12 @@ Array [
       "line": 0,
     },
     "type": "identifier",
-    "value": "Foo",
-  },
-  Object {
-    "loc": Object {
-      "column": 0,
-      "line": 1,
-    },
-    "type": "newline",
-    "value": "
-",
-  },
-  Object {
-    "loc": Object {
-      "column": 1,
-      "line": 1,
-    },
-    "type": "keyword",
-    "value": "type",
-  },
-  Object {
-    "loc": Object {
-      "column": 5,
-      "line": 1,
-    },
-    "type": "whitespace",
-    "value": " ",
-  },
-  Object {
-    "loc": Object {
-      "column": 6,
-      "line": 1,
-    },
-    "type": "identifier",
     "value": "Bar",
   },
   Object {
     "loc": Object {
       "column": 9,
-      "line": 1,
+      "line": 0,
     },
     "type": "whitespace",
     "value": " ",
@@ -387,7 +354,7 @@ Array [
   Object {
     "loc": Object {
       "column": 10,
-      "line": 1,
+      "line": 0,
     },
     "type": "operator",
     "value": "=",
@@ -395,7 +362,7 @@ Array [
   Object {
     "loc": Object {
       "column": 11,
-      "line": 1,
+      "line": 0,
     },
     "type": "whitespace",
     "value": " ",
@@ -403,7 +370,7 @@ Array [
   Object {
     "loc": Object {
       "column": 12,
-      "line": 1,
+      "line": 0,
     },
     "type": "identifier",
     "value": "Boolean",
@@ -411,7 +378,7 @@ Array [
   Object {
     "loc": Object {
       "column": 19,
-      "line": 1,
+      "line": 0,
     },
     "type": "whitespace",
     "value": " ",
@@ -419,7 +386,7 @@ Array [
   Object {
     "loc": Object {
       "column": 20,
-      "line": 1,
+      "line": 0,
     },
     "type": "operator",
     "value": "|",
@@ -427,7 +394,7 @@ Array [
   Object {
     "loc": Object {
       "column": 21,
-      "line": 1,
+      "line": 0,
     },
     "type": "whitespace",
     "value": " ",
@@ -435,7 +402,7 @@ Array [
   Object {
     "loc": Object {
       "column": 22,
-      "line": 1,
+      "line": 0,
     },
     "type": "identifier",
     "value": "String",
@@ -443,7 +410,7 @@ Array [
   Object {
     "loc": Object {
       "column": 28,
-      "line": 1,
+      "line": 0,
     },
     "type": "whitespace",
     "value": " ",
@@ -451,7 +418,7 @@ Array [
   Object {
     "loc": Object {
       "column": 29,
-      "line": 1,
+      "line": 0,
     },
     "type": "operator",
     "value": "|",
@@ -459,7 +426,7 @@ Array [
   Object {
     "loc": Object {
       "column": 30,
-      "line": 1,
+      "line": 0,
     },
     "type": "whitespace",
     "value": " ",
@@ -467,7 +434,7 @@ Array [
   Object {
     "loc": Object {
       "column": 31,
-      "line": 1,
+      "line": 0,
     },
     "type": "identifier",
     "value": "Number",
@@ -475,7 +442,7 @@ Array [
   Object {
     "loc": Object {
       "column": 0,
-      "line": 2,
+      "line": 1,
     },
     "type": "newline",
     "value": "
@@ -484,7 +451,7 @@ Array [
   Object {
     "loc": Object {
       "column": 1,
-      "line": 2,
+      "line": 1,
     },
     "type": "keyword",
     "value": "type",
@@ -492,7 +459,7 @@ Array [
   Object {
     "loc": Object {
       "column": 5,
-      "line": 2,
+      "line": 1,
     },
     "type": "whitespace",
     "value": " ",
@@ -500,7 +467,7 @@ Array [
   Object {
     "loc": Object {
       "column": 6,
-      "line": 2,
+      "line": 1,
     },
     "type": "identifier",
     "value": "Maybe",
@@ -508,7 +475,7 @@ Array [
   Object {
     "loc": Object {
       "column": 11,
-      "line": 2,
+      "line": 1,
     },
     "type": "whitespace",
     "value": " ",
@@ -516,7 +483,7 @@ Array [
   Object {
     "loc": Object {
       "column": 12,
-      "line": 2,
+      "line": 1,
     },
     "type": "identifier",
     "value": "Number",
@@ -524,7 +491,7 @@ Array [
   Object {
     "loc": Object {
       "column": 18,
-      "line": 2,
+      "line": 1,
     },
     "type": "whitespace",
     "value": " ",
@@ -532,7 +499,7 @@ Array [
   Object {
     "loc": Object {
       "column": 19,
-      "line": 2,
+      "line": 1,
     },
     "type": "operator",
     "value": "=",
@@ -540,7 +507,7 @@ Array [
   Object {
     "loc": Object {
       "column": 20,
-      "line": 2,
+      "line": 1,
     },
     "type": "whitespace",
     "value": " ",
@@ -548,7 +515,7 @@ Array [
   Object {
     "loc": Object {
       "column": 21,
-      "line": 2,
+      "line": 1,
     },
     "type": "identifier",
     "value": "Nothing",
@@ -556,7 +523,7 @@ Array [
   Object {
     "loc": Object {
       "column": 28,
-      "line": 2,
+      "line": 1,
     },
     "type": "whitespace",
     "value": " ",
@@ -564,7 +531,7 @@ Array [
   Object {
     "loc": Object {
       "column": 29,
-      "line": 2,
+      "line": 1,
     },
     "type": "operator",
     "value": "|",
@@ -572,7 +539,7 @@ Array [
   Object {
     "loc": Object {
       "column": 30,
-      "line": 2,
+      "line": 1,
     },
     "type": "whitespace",
     "value": " ",
@@ -580,7 +547,7 @@ Array [
   Object {
     "loc": Object {
       "column": 31,
-      "line": 2,
+      "line": 1,
     },
     "type": "identifier",
     "value": "Number",
@@ -588,7 +555,7 @@ Array [
   Object {
     "loc": Object {
       "column": 0,
-      "line": 3,
+      "line": 2,
     },
     "type": "newline",
     "value": "
@@ -597,7 +564,7 @@ Array [
   Object {
     "loc": Object {
       "column": 1,
-      "line": 3,
+      "line": 2,
     },
     "type": "keyword",
     "value": "type",
@@ -605,7 +572,7 @@ Array [
   Object {
     "loc": Object {
       "column": 5,
-      "line": 3,
+      "line": 2,
     },
     "type": "whitespace",
     "value": " ",
@@ -613,7 +580,7 @@ Array [
   Object {
     "loc": Object {
       "column": 6,
-      "line": 3,
+      "line": 2,
     },
     "type": "identifier",
     "value": "Users",
@@ -621,7 +588,7 @@ Array [
   Object {
     "loc": Object {
       "column": 11,
-      "line": 3,
+      "line": 2,
     },
     "type": "whitespace",
     "value": " ",
@@ -629,7 +596,7 @@ Array [
   Object {
     "loc": Object {
       "column": 12,
-      "line": 3,
+      "line": 2,
     },
     "type": "operator",
     "value": "=",
@@ -637,7 +604,7 @@ Array [
   Object {
     "loc": Object {
       "column": 13,
-      "line": 3,
+      "line": 2,
     },
     "type": "whitespace",
     "value": " ",
@@ -645,7 +612,7 @@ Array [
   Object {
     "loc": Object {
       "column": 14,
-      "line": 3,
+      "line": 2,
     },
     "type": "identifier",
     "value": "List",
@@ -653,7 +620,7 @@ Array [
   Object {
     "loc": Object {
       "column": 18,
-      "line": 3,
+      "line": 2,
     },
     "type": "whitespace",
     "value": " ",
@@ -661,7 +628,7 @@ Array [
   Object {
     "loc": Object {
       "column": 19,
-      "line": 3,
+      "line": 2,
     },
     "type": "identifier",
     "value": "User",

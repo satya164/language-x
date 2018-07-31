@@ -12,12 +12,6 @@ The language provides the following types:
 * Maybe T
 * Nothing
 
-Custom types can also be defined:
-
-```
-type Foo
-```
-
 A type can also refer to other types via the `|` (`or`) notation:
 
 ```

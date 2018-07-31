@@ -5,7 +5,6 @@ const parse = require('../parse');
 it('parses type declaration', () => {
   expect(
     parse(`
-    type Foo
     type Bar = Boolean | String | Number
     type Maybe Number = Nothing | Number
     type Users = List User
@@ -13,10 +12,10 @@ it('parses type declaration', () => {
   ).toMatchSnapshot();
 });
 
-it('parses let declaration', () => {
-  expect(
-    parse(`
-    let foo = 10
-  `)
-  ).toMatchSnapshot();
-});
+// it('parses let declaration', () => {
+//   expect(
+//     parse(`
+//     let foo = 10
+//   `)
+//   ).toMatchSnapshot();
+// });
