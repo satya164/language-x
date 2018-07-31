@@ -2,141 +2,141 @@
 
 exports[`parses function declaration 1`] = `
 Array [
-  Node "FunctionDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "ParameterExpression"
-        id: Node "Identifier"
-          name: "calc"
-        params: Array [
-          Node "Identifier"
-            name: "a",
-          Node "Identifier"
-            name: "b",
-          Node "Identifier"
-            name: "c",
-        ]
-      right: Node "MathExpression"
-        left: Node "Identifier"
-          name: "a"
-        operator: "+"
-        right: Node "MathExpression"
-          left: Node "Identifier"
-            name: "b"
-          operator: "*"
-          right: Node "Identifier"
-            name: "c",
-  Node "FunctionDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "ParameterExpression"
-        id: Node "Identifier"
-          name: "foo"
-        params: Array [
-          Node "Identifier"
-            name: "a",
-          Node "Identifier"
-            name: "add",
-        ]
-      right: Node "ParameterExpression"
-        id: Node "Identifier"
-          name: "add"
-        params: Array [
-          Node "Identifier"
-            name: "a",
-        ],
+  Node "FunctionDeclaration" (1:5)
+  value: Node "AssignmentExpression" (1:10)
+    left: Node "ParameterExpression" (1:10)
+      id: Node "Identifier" (1:10)
+        name: "calc"
+      params: Array [
+        Node "Identifier" (1:15)
+          name: "a",
+        Node "Identifier" (1:17)
+          name: "b",
+        Node "Identifier" (1:19)
+          name: "c",
+      ]
+    right: Node "MathExpression" (1:23)
+      left: Node "Identifier" (1:23)
+        name: "a"
+      operator: "+"
+      right: Node "MathExpression" (1:27)
+        left: Node "Identifier" (1:27)
+          name: "b"
+        operator: "*"
+        right: Node "Identifier" (1:31)
+          name: "c",
+  Node "FunctionDeclaration" (2:5)
+  value: Node "AssignmentExpression" (2:10)
+    left: Node "ParameterExpression" (2:10)
+      id: Node "Identifier" (2:10)
+        name: "foo"
+      params: Array [
+        Node "Identifier" (2:14)
+          name: "a",
+        Node "Identifier" (2:16)
+          name: "add",
+      ]
+    right: Node "ParameterExpression" (2:22)
+      id: Node "Identifier" (2:22)
+        name: "add"
+      params: Array [
+        Node "Identifier" (2:26)
+          name: "a",
+      ],
 ]
 `;
 
 exports[`parses let declaration 1`] = `
 Array [
-  Node "LetDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "Identifier"
-        name: "foo"
-      right: Node "NumericLiteral"
-        value: 10,
-  Node "LetDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "Identifier"
-        name: "bar"
-      right: Node "StringLiteral"
-        value: "\\"Hello world",
+  Node "LetDeclaration" (1:5)
+  value: Node "AssignmentExpression" (1:9)
+    left: Node "Identifier" (1:9)
+      name: "foo"
+    right: Node "NumericLiteral" (1:15)
+      value: 10,
+  Node "LetDeclaration" (2:5)
+  value: Node "AssignmentExpression" (2:9)
+    left: Node "Identifier" (2:9)
+      name: "bar"
+    right: Node "StringLiteral" (2:15)
+      value: "\\"Hello world",
 ]
 `;
 
 exports[`parses math expression 1`] = `
 Array [
-  Node "LetDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "Identifier"
-        name: "a"
-      right: Node "MathExpression"
-        left: Node "NumericLiteral"
-          value: 10
-        operator: "*"
-        right: Node "MathExpression"
-          left: Node "NumericLiteral"
-            value: 30
-          operator: "+"
-          right: Node "MathExpression"
-            left: Node "Identifier"
-              name: "a"
-            operator: "-"
-            right: Node "MathExpression"
-              left: Node "NumericLiteral"
-                value: 20
-              operator: "/"
-              right: Node "Identifier"
-                name: "foo",
+  Node "LetDeclaration" (1:5)
+  value: Node "AssignmentExpression" (1:9)
+    left: Node "Identifier" (1:9)
+      name: "a"
+    right: Node "MathExpression" (1:13)
+      left: Node "NumericLiteral" (1:13)
+        value: 10
+      operator: "*"
+      right: Node "MathExpression" (1:18)
+        left: Node "NumericLiteral" (1:18)
+          value: 30
+        operator: "+"
+        right: Node "MathExpression" (1:23)
+          left: Node "Identifier" (1:23)
+            name: "a"
+          operator: "-"
+          right: Node "MathExpression" (1:27)
+            left: Node "NumericLiteral" (1:27)
+              value: 20
+            operator: "/"
+            right: Node "Identifier" (1:32)
+              name: "foo",
 ]
 `;
 
 exports[`parses type declaration 1`] = `
 Array [
-  Node "TypeDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "Identifier"
-        name: "Foo"
-      right: Node "Identifier"
-        name: "Bar",
-  Node "TypeDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "Identifier"
-        name: "Bar"
-      right: Node "UnionOperation"
-        values: Array [
-          Node "Identifier"
-            name: "Boolean",
-          Node "Identifier"
-            name: "String",
-          Node "Identifier"
-            name: "Number",
-        ],
-  Node "TypeDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "ParameterExpression"
-        id: Node "Identifier"
-          name: "Maybe"
-        params: Array [
-          Node "Identifier"
-            name: "Number",
-        ]
-      right: Node "UnionOperation"
-        values: Array [
-          Node "Identifier"
-            name: "Nothing",
-          Node "Identifier"
-            name: "Number",
-        ],
-  Node "TypeDeclaration"
-    value: Node "AssignmentExpression"
-      left: Node "Identifier"
-        name: "Users"
-      right: Node "ParameterExpression"
-        id: Node "Identifier"
-          name: "List"
-        params: Array [
-          Node "Identifier"
-            name: "User",
-        ],
+  Node "TypeDeclaration" (1:5)
+  value: Node "AssignmentExpression" (1:10)
+    left: Node "Identifier" (1:10)
+      name: "Foo"
+    right: Node "Identifier" (1:16)
+      name: "Bar",
+  Node "TypeDeclaration" (2:5)
+  value: Node "AssignmentExpression" (2:10)
+    left: Node "Identifier" (2:10)
+      name: "Bar"
+    right: Node "UnionOperation" (2:16)
+      values: Array [
+        Node "Identifier" (2:16)
+          name: "Boolean",
+        Node "Identifier" (2:26)
+          name: "String",
+        Node "Identifier" (2:35)
+          name: "Number",
+      ],
+  Node "TypeDeclaration" (3:5)
+  value: Node "AssignmentExpression" (3:10)
+    left: Node "ParameterExpression" (3:10)
+      id: Node "Identifier" (3:10)
+        name: "Maybe"
+      params: Array [
+        Node "Identifier" (3:16)
+          name: "Number",
+      ]
+    right: Node "UnionOperation" (3:25)
+      values: Array [
+        Node "Identifier" (3:25)
+          name: "Nothing",
+        Node "Identifier" (3:35)
+          name: "Number",
+      ],
+  Node "TypeDeclaration" (4:5)
+  value: Node "AssignmentExpression" (4:10)
+    left: Node "Identifier" (4:10)
+      name: "Users"
+    right: Node "ParameterExpression" (4:18)
+      id: Node "Identifier" (4:18)
+        name: "List"
+      params: Array [
+        Node "Identifier" (4:23)
+          name: "User",
+      ],
 ]
 `;

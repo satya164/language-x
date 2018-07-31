@@ -1,17 +1,19 @@
 /* @flow */
 
-const tokenize = require('./tokenize');
+const {
+  TypeDeclaration,
+  LetDeclaration,
+  FunctionDeclaration,
+  Identifier,
+  ParameterExpression,
+  StringLiteral,
+  NumericLiteral,
+  AssignmentExpression,
+  UnionOperation,
+  MathExpression,
+} = require('./types');
 
-const Identifier = 'Identifier';
-const LetDeclaration = 'LetDeclaration';
-const FunctionDeclaration = 'FunctionDeclaration';
-const TypeDeclaration = 'TypeDeclaration';
-const ParameterExpression = 'ParameterExpression';
-const AssignmentExpression = 'AssignmentExpression';
-const MathExpression = 'MathExpression';
-const StringLiteral = 'StringLiteral';
-const NumericLiteral = 'NumericLiteral';
-const UnionOperation = 'UnionOperation';
+const tokenize = require('./tokenize');
 
 const error = token =>
   new Error(
@@ -23,26 +25,23 @@ const error = token =>
 const declaration = (token, peek, end) => {
   if (token && token.type === 'keyword') {
     switch (token.value) {
-      case 'type': {
-        return {
-          type: TypeDeclaration,
-          value: expression(peek(), peek, end),
-        };
-      }
+      case 'type':
+        return TypeDeclaration.create(
+          { value: expression(peek(), peek, end) },
+          token.loc
+        );
 
-      case 'let': {
-        return {
-          type: LetDeclaration,
-          value: expression(peek(), peek, end),
-        };
-      }
+      case 'let':
+        return LetDeclaration.create(
+          { value: expression(peek(), peek, end) },
+          token.loc
+        );
 
-      case 'func': {
-        return {
-          type: FunctionDeclaration,
-          value: expression(peek(), peek, end),
-        };
-      }
+      case 'func':
+        return FunctionDeclaration.create(
+          { value: expression(peek(), peek, end) },
+          token.loc
+        );
 
       default:
         throw error(token);
@@ -59,69 +58,48 @@ const expression = (token, peek, end) => {
     let expr;
 
     if (token.type === 'string') {
-      expr = {
-        type: StringLiteral,
-        value: token.value,
-      };
+      expr = StringLiteral.create({ value: token.value }, token.loc);
     } else if (token.type === 'number') {
-      expr = {
-        type: NumericLiteral,
-        value: parseFloat(token.value),
-      };
+      expr = NumericLiteral.create(
+        { value: parseFloat(token.value) },
+        token.loc
+      );
     } else if (token.type === 'identifier') {
-      expr = {
-        type: Identifier,
-        name: token.value,
-      };
+      expr = Identifier.create({ name: token.value }, token.loc);
     } else {
       throw error(token);
     }
 
     while (next && next.type === 'identifier') {
-      // If the identifier is followed by more identifiers, it's call expression
+      // If the identifier is followed by more identifiers, it's parameter expression
       // For the first identifier, create our expression node
       // For later identifiers, add them to params
-      expr =
-        expr.type === Identifier
-          ? {
-              type: ParameterExpression,
-              id: expr,
-              params: [],
-            }
-          : expr;
+      expr = Identifier.check(expr)
+        ? ParameterExpression.create({ id: expr, params: [] }, token.loc)
+        : expr;
 
       /* $FlowFixMe */
-      expr.params.push({
-        type: Identifier,
-        name: next.value,
-      });
+      expr.params.push(Identifier.create({ name: next.value }, next.loc));
 
       next = peek();
     }
 
     if (next && (next.type === 'string' || next.type === 'number')) {
-      // If the identifier is followed by a string ot number, it's call expression
+      // If the identifier is followed by a string ot number, it's parameter expression
       // Unlike identifiers, these can only be at the end
-      expr =
-        expr.type === Identifier
-          ? {
-              type: ParameterExpression,
-              callee: expr,
-              params: [],
-            }
-          : expr;
+      expr = Identifier.check(expr)
+        ? ParameterExpression.create({ id: expr, params: [] }, token.loc)
+        : expr;
 
-      /* $FlowFixMe */
       expr.params.push(expression(next, peek, end));
     } else if (next && next.type === 'operator') {
       if (next.value === '=') {
         // If we encounter the assignment operator, assume assignment expression
         // Assign the current expression to the left side and continue parsing the right side of assignment
-        expr = {
-          type: AssignmentExpression,
-          left: expr,
-          right: expression(peek(), peek, end),
-        };
+        expr = AssignmentExpression.create(
+          { left: expr, right: expression(peek(), peek, end) },
+          token.loc
+        );
       } else if (next.value === '|') {
         // If we encounter the union operator, assume union expression
         // Add the current expression to the list of values in the union
@@ -156,22 +134,21 @@ const expression = (token, peek, end) => {
           next = peek();
         }
 
-        expr = {
-          type: UnionOperation,
-          values,
-        };
+        expr = UnionOperation.create({ values }, token.loc);
       } else if (
         next.value === '/' ||
         next.value === '*' ||
         next.value === '+' ||
         next.value === '-'
       ) {
-        expr = {
-          type: MathExpression,
-          operator: next.value,
-          left: expr,
-          right: expression(peek(), peek, end),
-        };
+        expr = MathExpression.create(
+          {
+            left: expr,
+            right: expression(peek(), peek, end),
+            operator: next.value,
+          },
+          token.loc
+        );
       }
     }
 

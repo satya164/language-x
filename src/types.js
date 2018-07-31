@@ -5,35 +5,85 @@ type Location = {
   column: number,
 };
 
-export type Identifier = {
-  name: string,
-  loc: Location,
+const helper = function<T>(type, create: (options: T) => *) {
+  return {
+    check: (node: any) => node && node.type === type,
+    create: (options: T, loc: Location) => ({
+      ...create(options),
+      type,
+      loc: {
+        start: loc,
+      },
+    }),
+  };
 };
 
-export type LetDeclaration = {
-  id: Identifier,
-  value: Identifier | StringLiteral | NumericLiteral,
-  loc: Location,
-};
+exports.Identifier = helper('Identifier', ({ name }: { name: string }) => ({
+  name,
+}));
 
-export type TypeDeclaration = {
-  id: Identifier,
-  value: Identifier | UnionOperation,
-  params: Identifier[],
-  loc: Location,
-};
+exports.TypeDeclaration = helper('TypeDeclaration', ({ value }: *) => ({
+  value,
+}));
 
-export type StringLiteral = {
-  value: string,
-  loc: Location,
-};
+exports.LetDeclaration = helper('LetDeclaration', ({ value }: *) => ({
+  value,
+}));
 
-export type NumericLiteral = {
-  value: string,
-  loc: Location,
-};
+exports.FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => ({
+  value,
+}));
 
-export type UnionOperation = {
-  types: Identifier,
-  loc: Location,
-};
+exports.ParameterExpression = helper(
+  'ParameterExpression',
+  ({ id, params }: { id: *, params: Array<*> }) => ({
+    id,
+    params,
+  })
+);
+
+exports.AssignmentExpression = helper(
+  'AssignmentExpression',
+  ({ left, right }: { left: *, right: * }) => ({
+    left,
+    right,
+  })
+);
+
+exports.MathExpression = helper(
+  'MathExpression',
+  ({
+    left,
+    right,
+    operator,
+  }: {
+    left: *,
+    right: *,
+    operator: '/' | '*' | '+' | '-',
+  }) => ({
+    left,
+    right,
+    operator,
+  })
+);
+
+exports.UnionOperation = helper(
+  'UnionOperation',
+  ({ values }: { values: * }) => ({
+    values,
+  })
+);
+
+exports.StringLiteral = helper(
+  'StringLiteral',
+  ({ value }: { value: string }) => ({
+    value,
+  })
+);
+
+exports.NumericLiteral = helper(
+  'NumericLiteral',
+  ({ value }: { value: number }) => ({
+    value,
+  })
+);
