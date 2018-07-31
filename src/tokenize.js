@@ -23,12 +23,6 @@ type Identifier = {
   loc: Location,
 };
 
-type Declaration = {
-  type: 'main' | 'type' | 'let' | 'func',
-  value: string,
-  loc: Location,
-};
-
 type Number = {
   type: 'number',
   value: string,
@@ -57,7 +51,6 @@ type Token =
   | Keyword
   | Operator
   | Identifier
-  | Declaration
   | Number
   | String
   | Whitespace
@@ -70,7 +63,10 @@ const keywords = {
   func: true,
 };
 
-module.exports = function tokenize(code: string): Token[] {
+module.exports = function tokenize(
+  code: string,
+  strict: boolean = true
+): Token[] {
   const tokens: Token[] = [];
 
   let line = 1; // lines start at 1
@@ -196,8 +192,10 @@ module.exports = function tokenize(code: string): Token[] {
                 loc: { line, column },
               });
             }
-          } else {
-            throw new Error(`Unhandled character "${char}"`);
+          } else if (strict) {
+            throw new Error(
+              `Syntax error: unexpected character "${char}" at ${line}:${column}`
+            );
           }
         }
         break;
