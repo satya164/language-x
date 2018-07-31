@@ -180,9 +180,7 @@ const expression = (token, peek, end) => {
 module.exports = function parse(code: string) {
   const body = [];
 
-  const tokens = tokenize(code).filter(
-    t => t.type !== 'whitespace' && t.type !== 'newline'
-  );
+  const tokens = tokenize(code);
 
   let main = false;
 

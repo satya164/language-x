@@ -202,5 +202,5 @@ module.exports = function tokenize(
     }
   }
 
-  return tokens;
+  return tokens.filter(t => t.type !== 'whitespace' && t.type !== 'newline');
 };
