@@ -1,6 +1,12 @@
 /* @flow */
 
+const print = require('ast-pretty-print');
 const parse = require('../parse');
+
+expect.addSnapshotSerializer({
+  test: node => Boolean(node && node.type),
+  print: node => print(node, false),
+});
 
 it('parses type declaration', () => {
   expect(

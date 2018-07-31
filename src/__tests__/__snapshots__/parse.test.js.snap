@@ -2,273 +2,141 @@
 
 exports[`parses function declaration 1`] = `
 Array [
-  Object {
-    "type": "FunctionDeclaration",
-    "value": Object {
-      "left": Object {
-        "id": Object {
-          "name": "calc",
-          "type": "Identifier",
-        },
-        "params": Array [
-          Object {
-            "name": "a",
-            "type": "Identifier",
-          },
-          Object {
-            "name": "b",
-            "type": "Identifier",
-          },
-          Object {
-            "name": "c",
-            "type": "Identifier",
-          },
+  Node "FunctionDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "ParameterExpression"
+        id: Node "Identifier"
+          name: "calc"
+        params: Array [
+          Node "Identifier"
+            name: "a",
+          Node "Identifier"
+            name: "b",
+          Node "Identifier"
+            name: "c",
+        ]
+      right: Node "MathExpression"
+        left: Node "Identifier"
+          name: "a"
+        operator: "+"
+        right: Node "MathExpression"
+          left: Node "Identifier"
+            name: "b"
+          operator: "*"
+          right: Node "Identifier"
+            name: "c",
+  Node "FunctionDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "ParameterExpression"
+        id: Node "Identifier"
+          name: "foo"
+        params: Array [
+          Node "Identifier"
+            name: "a",
+          Node "Identifier"
+            name: "add",
+        ]
+      right: Node "ParameterExpression"
+        id: Node "Identifier"
+          name: "add"
+        params: Array [
+          Node "Identifier"
+            name: "a",
         ],
-        "type": "ParameterExpression",
-      },
-      "right": Object {
-        "left": Object {
-          "name": "a",
-          "type": "Identifier",
-        },
-        "operator": "+",
-        "right": Object {
-          "left": Object {
-            "name": "b",
-            "type": "Identifier",
-          },
-          "operator": "*",
-          "right": Object {
-            "name": "c",
-            "type": "Identifier",
-          },
-          "type": "MathExpression",
-        },
-        "type": "MathExpression",
-      },
-      "type": "AssignmentExpression",
-    },
-  },
-  Object {
-    "type": "FunctionDeclaration",
-    "value": Object {
-      "left": Object {
-        "id": Object {
-          "name": "foo",
-          "type": "Identifier",
-        },
-        "params": Array [
-          Object {
-            "name": "a",
-            "type": "Identifier",
-          },
-          Object {
-            "name": "add",
-            "type": "Identifier",
-          },
-        ],
-        "type": "ParameterExpression",
-      },
-      "right": Object {
-        "id": Object {
-          "name": "add",
-          "type": "Identifier",
-        },
-        "params": Array [
-          Object {
-            "name": "a",
-            "type": "Identifier",
-          },
-        ],
-        "type": "ParameterExpression",
-      },
-      "type": "AssignmentExpression",
-    },
-  },
 ]
 `;
 
 exports[`parses let declaration 1`] = `
 Array [
-  Object {
-    "type": "LetDeclaration",
-    "value": Object {
-      "left": Object {
-        "name": "foo",
-        "type": "Identifier",
-      },
-      "right": Object {
-        "type": "NumericLiteral",
-        "value": 10,
-      },
-      "type": "AssignmentExpression",
-    },
-  },
-  Object {
-    "type": "LetDeclaration",
-    "value": Object {
-      "left": Object {
-        "name": "bar",
-        "type": "Identifier",
-      },
-      "right": Object {
-        "type": "StringLiteral",
-        "value": "\\"Hello world",
-      },
-      "type": "AssignmentExpression",
-    },
-  },
+  Node "LetDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "Identifier"
+        name: "foo"
+      right: Node "NumericLiteral"
+        value: 10,
+  Node "LetDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "Identifier"
+        name: "bar"
+      right: Node "StringLiteral"
+        value: "\\"Hello world",
 ]
 `;
 
 exports[`parses math expression 1`] = `
 Array [
-  Object {
-    "type": "LetDeclaration",
-    "value": Object {
-      "left": Object {
-        "name": "a",
-        "type": "Identifier",
-      },
-      "right": Object {
-        "left": Object {
-          "type": "NumericLiteral",
-          "value": 10,
-        },
-        "operator": "*",
-        "right": Object {
-          "left": Object {
-            "type": "NumericLiteral",
-            "value": 30,
-          },
-          "operator": "+",
-          "right": Object {
-            "left": Object {
-              "name": "a",
-              "type": "Identifier",
-            },
-            "operator": "-",
-            "right": Object {
-              "left": Object {
-                "type": "NumericLiteral",
-                "value": 20,
-              },
-              "operator": "/",
-              "right": Object {
-                "name": "foo",
-                "type": "Identifier",
-              },
-              "type": "MathExpression",
-            },
-            "type": "MathExpression",
-          },
-          "type": "MathExpression",
-        },
-        "type": "MathExpression",
-      },
-      "type": "AssignmentExpression",
-    },
-  },
+  Node "LetDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "Identifier"
+        name: "a"
+      right: Node "MathExpression"
+        left: Node "NumericLiteral"
+          value: 10
+        operator: "*"
+        right: Node "MathExpression"
+          left: Node "NumericLiteral"
+            value: 30
+          operator: "+"
+          right: Node "MathExpression"
+            left: Node "Identifier"
+              name: "a"
+            operator: "-"
+            right: Node "MathExpression"
+              left: Node "NumericLiteral"
+                value: 20
+              operator: "/"
+              right: Node "Identifier"
+                name: "foo",
 ]
 `;
 
 exports[`parses type declaration 1`] = `
 Array [
-  Object {
-    "type": "TypeDeclaration",
-    "value": Object {
-      "left": Object {
-        "name": "Foo",
-        "type": "Identifier",
-      },
-      "right": Object {
-        "name": "Bar",
-        "type": "Identifier",
-      },
-      "type": "AssignmentExpression",
-    },
-  },
-  Object {
-    "type": "TypeDeclaration",
-    "value": Object {
-      "left": Object {
-        "name": "Bar",
-        "type": "Identifier",
-      },
-      "right": Object {
-        "type": "UnionOperation",
-        "values": Array [
-          Object {
-            "name": "Boolean",
-            "type": "Identifier",
-          },
-          Object {
-            "name": "String",
-            "type": "Identifier",
-          },
-          Object {
-            "name": "Number",
-            "type": "Identifier",
-          },
+  Node "TypeDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "Identifier"
+        name: "Foo"
+      right: Node "Identifier"
+        name: "Bar",
+  Node "TypeDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "Identifier"
+        name: "Bar"
+      right: Node "UnionOperation"
+        values: Array [
+          Node "Identifier"
+            name: "Boolean",
+          Node "Identifier"
+            name: "String",
+          Node "Identifier"
+            name: "Number",
         ],
-      },
-      "type": "AssignmentExpression",
-    },
-  },
-  Object {
-    "type": "TypeDeclaration",
-    "value": Object {
-      "left": Object {
-        "id": Object {
-          "name": "Maybe",
-          "type": "Identifier",
-        },
-        "params": Array [
-          Object {
-            "name": "Number",
-            "type": "Identifier",
-          },
+  Node "TypeDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "ParameterExpression"
+        id: Node "Identifier"
+          name: "Maybe"
+        params: Array [
+          Node "Identifier"
+            name: "Number",
+        ]
+      right: Node "UnionOperation"
+        values: Array [
+          Node "Identifier"
+            name: "Nothing",
+          Node "Identifier"
+            name: "Number",
         ],
-        "type": "ParameterExpression",
-      },
-      "right": Object {
-        "type": "UnionOperation",
-        "values": Array [
-          Object {
-            "name": "Nothing",
-            "type": "Identifier",
-          },
-          Object {
-            "name": "Number",
-            "type": "Identifier",
-          },
+  Node "TypeDeclaration"
+    value: Node "AssignmentExpression"
+      left: Node "Identifier"
+        name: "Users"
+      right: Node "ParameterExpression"
+        id: Node "Identifier"
+          name: "List"
+        params: Array [
+          Node "Identifier"
+            name: "User",
         ],
-      },
-      "type": "AssignmentExpression",
-    },
-  },
-  Object {
-    "type": "TypeDeclaration",
-    "value": Object {
-      "left": Object {
-        "name": "Users",
-        "type": "Identifier",
-      },
-      "right": Object {
-        "id": Object {
-          "name": "List",
-          "type": "Identifier",
-        },
-        "params": Array [
-          Object {
-            "name": "User",
-            "type": "Identifier",
-          },
-        ],
-        "type": "ParameterExpression",
-      },
-      "type": "AssignmentExpression",
-    },
-  },
 ]
 `;

@@ -281,7 +281,7 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.2.0, ansi-styles@^3.2.1:
+ansi-styles@^3.0.0, ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   dependencies:
@@ -379,6 +379,13 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
 assign-symbols@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
+
+ast-pretty-print@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ast-pretty-print/-/ast-pretty-print-2.0.1.tgz#e3a0f443b8f9414d7925dea18d125362e4f6a372"
+  dependencies:
+    pretty-format-ast "^1.0.1"
+    pretty-format2 "^2.0.3"
 
 astral-regex@^1.0.0:
   version "1.0.0"
@@ -3139,6 +3146,18 @@ preserve@^0.2.0:
 prettier@^1.14.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.0.tgz#847c235522035fd988100f1f43cf20a7d24f9372"
+
+pretty-format-ast@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/pretty-format-ast/-/pretty-format-ast-1.0.1.tgz#1d8cff9adeeaad5376aa80997952a55a2907ca8d"
+  dependencies:
+    pretty-format2 "^2.0.3"
+
+pretty-format2@^2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/pretty-format2/-/pretty-format2-2.0.4.tgz#4a76e0b0a91eb0907ded86763d83af44f5e42dc3"
+  dependencies:
+    ansi-styles "^3.0.0"
 
 pretty-format@^23.2.0:
   version "23.2.0"
