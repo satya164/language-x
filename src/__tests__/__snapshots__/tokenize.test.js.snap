@@ -1,5 +1,130 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`tokenizes function declaration 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 1,
+    },
+    "type": "keyword",
+    "value": "func",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "add",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 10,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 11,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "b",
+  },
+  Object {
+    "loc": Object {
+      "column": 12,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 13,
+      "line": 1,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 14,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 15,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 16,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 17,
+      "line": 1,
+    },
+    "type": "operator",
+    "value": "+",
+  },
+  Object {
+    "loc": Object {
+      "column": 18,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 19,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "b",
+  },
+]
+`;
+
 exports[`tokenizes let declaration 1`] = `
 Array [
   Object {
@@ -57,6 +182,51 @@ Array [
     },
     "type": "number",
     "value": "10",
+  },
+]
+`;
+
+exports[`tokenizes main declaration 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 1,
+    },
+    "type": "keyword",
+    "value": "main",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "Foo",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 1,
+    },
+    "type": "whitespace",
+    "value": " ",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "Bar",
   },
 ]
 `;

@@ -5,8 +5,19 @@ type Location = {
   column: number,
 };
 
+const assert = (node, ...types) => {
+  if (!types.some(t => t.check(node))) {
+    throw new Error(
+      `Syntax error: expected ${types
+        .map(t => t.name)
+        .join(' or ')}, but got ${node && node.type}`
+    );
+  }
+};
+
 const helper = function<T>(type, create: (options: T) => *) {
   return {
+    name: type,
     check: (node: any) => node && node.type === type,
     create: (options: T, loc: Location) => ({
       ...create(options),
@@ -18,23 +29,31 @@ const helper = function<T>(type, create: (options: T) => *) {
   };
 };
 
-exports.Identifier = helper('Identifier', ({ name }: { name: string }) => ({
+const Identifier = helper('Identifier', ({ name }: { name: string }) => ({
   name,
 }));
 
-exports.TypeDeclaration = helper('TypeDeclaration', ({ value }: *) => ({
+const MainDeclaration = helper('MainDeclaration', ({ value }: *) => {
+  assert(value, Identifier, ParameterExpression);
+
+  return {
+    value,
+  };
+});
+
+const TypeDeclaration = helper('TypeDeclaration', ({ value }: *) => ({
   value,
 }));
 
-exports.LetDeclaration = helper('LetDeclaration', ({ value }: *) => ({
+const LetDeclaration = helper('LetDeclaration', ({ value }: *) => ({
   value,
 }));
 
-exports.FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => ({
+const FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => ({
   value,
 }));
 
-exports.ParameterExpression = helper(
+const ParameterExpression = helper(
   'ParameterExpression',
   ({ id, params }: { id: *, params: Array<*> }) => ({
     id,
@@ -42,7 +61,7 @@ exports.ParameterExpression = helper(
   })
 );
 
-exports.AssignmentExpression = helper(
+const AssignmentExpression = helper(
   'AssignmentExpression',
   ({ left, right }: { left: *, right: * }) => ({
     left,
@@ -50,7 +69,7 @@ exports.AssignmentExpression = helper(
   })
 );
 
-exports.MathExpression = helper(
+const MathExpression = helper(
   'MathExpression',
   ({
     left,
@@ -67,23 +86,35 @@ exports.MathExpression = helper(
   })
 );
 
-exports.UnionOperation = helper(
+const UnionOperation = helper(
   'UnionOperation',
   ({ values }: { values: * }) => ({
     values,
   })
 );
 
-exports.StringLiteral = helper(
+const StringLiteral = helper(
   'StringLiteral',
   ({ value }: { value: string }) => ({
     value,
   })
 );
 
-exports.NumericLiteral = helper(
+const NumericLiteral = helper(
   'NumericLiteral',
   ({ value }: { value: number }) => ({
     value,
   })
 );
+
+exports.Identifier = Identifier;
+exports.MainDeclaration = MainDeclaration;
+exports.TypeDeclaration = TypeDeclaration;
+exports.LetDeclaration = LetDeclaration;
+exports.FunctionDeclaration = FunctionDeclaration;
+exports.ParameterExpression = ParameterExpression;
+exports.AssignmentExpression = AssignmentExpression;
+exports.MathExpression = MathExpression;
+exports.UnionOperation = UnionOperation;
+exports.StringLiteral = StringLiteral;
+exports.NumericLiteral = NumericLiteral;

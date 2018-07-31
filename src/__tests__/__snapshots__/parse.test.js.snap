@@ -63,6 +63,31 @@ Array [
 ]
 `;
 
+exports[`parses main declaration 1`] = `
+Array [
+  Node "MainDeclaration" (1:0)
+  value: Node "Identifier" (1:5)
+    name: "Foo",
+]
+`;
+
+exports[`parses main declaration 2`] = `
+Array [
+  Node "MainDeclaration" (1:0)
+  value: Node "ParameterExpression" (1:5)
+    id: Node "Identifier" (1:5)
+      name: "Foo"
+    params: Array [
+      Node "Identifier" (1:9)
+        name: "Bar",
+    ],
+]
+`;
+
+exports[`parses main declaration 3`] = `"Syntax error: duplicate keyword \\"main\\" at 2:0"`;
+
+exports[`parses main declaration 4`] = `"Syntax error: expected Identifier or ParameterExpression, but got AssignmentExpression"`;
+
 exports[`parses math expression 1`] = `
 Array [
   Node "LetDeclaration" (1:0)

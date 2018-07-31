@@ -1,5 +1,39 @@
 # X language specification
 
+## Program
+
+A program can have a single `main` declartion as it's entry point:
+
+```
+main App "Hello world"
+```
+
+Here we have a function call after the `main` keyword.
+
+## Variables
+
+Variables are declared with a `let` keyword:
+
+```
+let foo = 10
+
+let bar = "Hello world"
+```
+
+## Functions
+
+Functions are defined with the `func` keyword:
+
+```
+func add a b => a + b
+```
+
+Functions can be called like:
+
+```
+add 3 4
+```
+
 ## Type system
 
 The language provides the following types:
@@ -33,22 +67,4 @@ type User = Record {
   name: String,
   age: Number,
 }
-```
-
-## Variables
-
-Variables are declared with a `let` keyword:
-
-```
-let foo = 10
-
-let bar = "Hello world"
-```
-
-## Functions
-
-Functions are defined with the `func` keyword:
-
-```
-func add a b => a + b
 ```

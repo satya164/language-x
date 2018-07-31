@@ -3,6 +3,14 @@
 const dedent = require('dedent');
 const tokenize = require('../tokenize');
 
+it('tokenizes main declaration', () => {
+  expect(
+    tokenize(dedent`
+    main Foo Bar
+  `)
+  ).toMatchSnapshot();
+});
+
 it('tokenizes type declaration', () => {
   expect(
     tokenize(dedent`
@@ -17,6 +25,14 @@ it('tokenizes let declaration', () => {
   expect(
     tokenize(dedent`
     let a = 10
+  `)
+  ).toMatchSnapshot();
+});
+
+it('tokenizes function declaration', () => {
+  expect(
+    tokenize(dedent`
+    func add a b = a + b
   `)
   ).toMatchSnapshot();
 });

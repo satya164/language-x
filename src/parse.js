@@ -2,6 +2,7 @@
 
 const tokenize = require('./tokenize');
 const {
+  MainDeclaration,
   TypeDeclaration,
   LetDeclaration,
   FunctionDeclaration,
@@ -24,6 +25,12 @@ const error = token =>
 const declaration = (token, peek, end) => {
   if (token && token.type === 'keyword') {
     switch (token.value) {
+      case 'main':
+        return MainDeclaration.create(
+          { value: expression(peek(), peek, end) },
+          token.loc
+        );
+
       case 'type':
         return TypeDeclaration.create(
           { value: expression(peek(), peek, end) },
@@ -169,6 +176,8 @@ module.exports = function parse(code: string) {
     t => t.type !== 'whitespace' && t.type !== 'newline'
   );
 
+  let main = false;
+
   for (let i = 0, l = tokens.length; i < l; i++) {
     const token = tokens[i];
     const peek = () => {
@@ -178,6 +187,18 @@ module.exports = function parse(code: string) {
     const end = () => {
       i--;
     };
+
+    if (token.type === 'keyword' && token.value === 'main') {
+      if (main) {
+        throw new Error(
+          `Syntax error: duplicate ${token.type} "${token.value}" at ${
+            token.loc.line
+          }:${token.loc.column}`
+        );
+      }
+
+      main = true;
+    }
 
     body.push(declaration(token, peek, end));
   }

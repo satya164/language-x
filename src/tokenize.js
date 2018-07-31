@@ -7,7 +7,7 @@ type Location = {
 
 type Keyword = {
   type: 'keyword',
-  value: 'type' | 'let' | 'func',
+  value: $Keys<typeof keywords>,
   loc: Location,
 };
 
@@ -24,7 +24,7 @@ type Identifier = {
 };
 
 type Declaration = {
-  type: 'type' | 'let' | 'func',
+  type: 'main' | 'type' | 'let' | 'func',
   value: string,
   loc: Location,
 };
@@ -63,7 +63,12 @@ type Token =
   | Whitespace
   | Newline;
 
-const keywords = ['type', 'let', 'func'];
+const keywords = {
+  main: true,
+  type: true,
+  let: true,
+  func: true,
+};
 
 module.exports = function tokenize(code: string): Token[] {
   const tokens: Token[] = [];
@@ -120,11 +125,7 @@ module.exports = function tokenize(code: string): Token[] {
       case '\t':
       case ' ':
         // Check for whitespace
-        if (
-          last &&
-          last.type === 'identifier' &&
-          keywords.includes(last.value)
-        ) {
+        if (last && last.type === 'identifier' && keywords[last.value]) {
           /* $FlowFixMe */
           last.type = 'keyword';
         }

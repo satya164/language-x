@@ -9,6 +9,33 @@ expect.addSnapshotSerializer({
   print: node => print(node, false),
 });
 
+it('parses main declaration', () => {
+  expect(
+    parse(dedent`
+    main Foo
+    `)
+  ).toMatchSnapshot();
+
+  expect(
+    parse(dedent`
+    main Foo Bar
+    `)
+  ).toMatchSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    main Foo
+    main Bar
+    `)
+  ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    main Foo = 42
+    `)
+  ).toThrowErrorMatchingSnapshot();
+});
+
 it('parses type declaration', () => {
   expect(
     parse(dedent`
