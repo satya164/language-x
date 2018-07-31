@@ -4,55 +4,55 @@ exports[`parses function declaration 1`] = `
 Node "Program" (1:0)
   body: Array [
     Node "FunctionDeclaration" (1:0)
-      value: Node "AssignmentExpression" (1:5)
-        left: Node "ParameterExpression" (1:5)
-          id: Node "Identifier" (1:5)
+      value: Node "AssignmentExpression" (1:4)
+        left: Node "ParameterExpression" (1:4)
+          id: Node "Identifier" (1:4)
             name: "calc"
           params: Array [
-            Node "Identifier" (1:10)
+            Node "Identifier" (1:9)
               name: "a",
-            Node "Identifier" (1:12)
+            Node "Identifier" (1:11)
               name: "b",
-            Node "Identifier" (1:14)
+            Node "Identifier" (1:13)
               name: "c",
           ]
-        right: Node "MathExpression" (1:18)
-          left: Node "Identifier" (1:18)
+        right: Node "MathExpression" (1:17)
+          left: Node "Identifier" (1:17)
             name: "a"
           operator: "+"
-          right: Node "MathExpression" (1:22)
-            left: Node "Identifier" (1:22)
+          right: Node "MathExpression" (1:21)
+            left: Node "Identifier" (1:21)
               name: "b"
             operator: "*"
-            right: Node "Identifier" (1:26)
+            right: Node "Identifier" (1:25)
               name: "c",
     Node "FunctionDeclaration" (2:0)
-      value: Node "AssignmentExpression" (2:5)
-        left: Node "ParameterExpression" (2:5)
-          id: Node "Identifier" (2:5)
+      value: Node "AssignmentExpression" (2:4)
+        left: Node "ParameterExpression" (2:4)
+          id: Node "Identifier" (2:4)
             name: "foo"
           params: Array [
-            Node "Identifier" (2:9)
+            Node "Identifier" (2:8)
               name: "a",
-            Node "Identifier" (2:11)
+            Node "Identifier" (2:10)
               name: "add",
           ]
-        right: Node "InstantiationExpression" (2:17)
-          id: Node "Identifier" (2:17)
+        right: Node "InstantiationExpression" (2:16)
+          id: Node "Identifier" (2:16)
             name: "add"
           params: Array [
-            Node "Identifier" (2:21)
+            Node "Identifier" (2:20)
               name: "a",
           ],
     Node "FunctionDeclaration" (3:0)
-      value: Node "AssignmentExpression" (3:5)
-        left: Node "Identifier" (3:5)
+      value: Node "AssignmentExpression" (3:4)
+        left: Node "Identifier" (3:4)
           name: "foo"
-        right: Node "InstantiationExpression" (3:11)
-          id: Node "Identifier" (3:11)
+        right: Node "InstantiationExpression" (3:10)
+          id: Node "Identifier" (3:10)
             name: "show"
           params: Array [
-            Node "StringLiteral" (3:16)
+            Node "StringLiteral" (3:15)
               value: "\\"hello world",
           ],
   ]
@@ -62,17 +62,17 @@ exports[`parses function declaration 2`] = `
 Node "Program" (1:0)
   body: Array [
     Node "FunctionDeclaration" (1:0)
-      value: Node "AssignmentExpression" (1:5)
-        left: Node "ParameterExpression" (1:5)
-          id: Node "Identifier" (1:5)
+      value: Node "AssignmentExpression" (1:4)
+        left: Node "ParameterExpression" (1:4)
+          id: Node "Identifier" (1:4)
             name: "add"
           params: Array [
-            Node "Identifier" (1:9)
+            Node "Identifier" (1:8)
               name: "a",
-            Node "Identifier" (1:11)
+            Node "Identifier" (1:10)
               name: "b",
           ]
-        right: Node "BlockStatement" (1:15)
+        right: Node "BlockStatement" (1:14)
           body: Array [
             Node "LetDeclaration" (2:2)
               value: Node "AssignmentExpression" (2:6)
@@ -89,16 +89,16 @@ Node "Program" (1:0)
                 name: "c",
           ],
     Node "FunctionDeclaration" (7:0)
-      value: Node "AssignmentExpression" (7:5)
-        left: Node "Identifier" (7:5)
+      value: Node "AssignmentExpression" (7:4)
+        left: Node "Identifier" (7:4)
           name: "foo"
-        right: Node "InstantiationExpression" (7:11)
-          id: Node "Identifier" (7:11)
+        right: Node "InstantiationExpression" (7:10)
+          id: Node "Identifier" (7:10)
             name: "add"
           params: Array [
-            Node "NumericLiteral" (7:15)
+            Node "NumericLiteral" (7:14)
               value: 3,
-            Node "NumericLiteral" (7:17)
+            Node "NumericLiteral" (7:16)
               value: 4,
           ],
   ]

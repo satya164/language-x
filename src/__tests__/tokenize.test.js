@@ -32,13 +32,13 @@ it('tokenizes let declaration', () => {
 it('tokenizes function declaration', () => {
   expect(
     tokenize(dedent`
-    func add a b = a + b
+    fun add a b = a + b
   `)
   ).toMatchSnapshot();
 
   expect(
     tokenize(dedent`
-    func add a b = {
+    fun add a b = {
       return a + b
     }
   `)

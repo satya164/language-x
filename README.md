@@ -22,16 +22,16 @@ let bar = "Hello world"
 
 ## Functions
 
-Functions are defined with the `func` keyword:
+Functions are defined with the `fun` keyword:
 
 ```
-func add a b = a + b
+fun add a b = a + b
 ```
 
 Functions can also contain multiple statements:
 
 ```
-func add a b = {
+fun add a b = {
   let c = a + b
 
   return c

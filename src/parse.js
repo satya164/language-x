@@ -47,7 +47,7 @@ const statement = (token, peek, back) => {
           token.loc
         );
 
-      case 'func':
+      case 'fun':
         return FunctionDeclaration.create(
           { value: expression(peek(), peek, back) },
           token.loc
@@ -111,11 +111,11 @@ const expression = (token, peek, back) => {
     }
 
     // Look at previous token to determine if it's a call expression or parameter expression
-    // If it was started after type, func, it's a parameter expression
+    // If it was started after type, fun, it's a parameter expression
     if (
       prev &&
       prev.type === 'keyword' &&
-      (prev.value === 'type' || prev.value === 'func')
+      (prev.value === 'type' || prev.value === 'fun')
     ) {
       while (next && next.type === 'identifier') {
         // If the identifier is followed by more identifiers, it's parameter expression

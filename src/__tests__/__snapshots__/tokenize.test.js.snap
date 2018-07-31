@@ -8,11 +8,11 @@ Array [
       "line": 1,
     },
     "type": "keyword",
-    "value": "func",
+    "value": "fun",
   },
   Object {
     "loc": Object {
-      "column": 5,
+      "column": 4,
       "line": 1,
     },
     "type": "identifier",
@@ -20,7 +20,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 9,
+      "column": 8,
       "line": 1,
     },
     "type": "identifier",
@@ -28,7 +28,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 11,
+      "column": 10,
       "line": 1,
     },
     "type": "identifier",
@@ -36,7 +36,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 13,
+      "column": 12,
       "line": 1,
     },
     "type": "operator",
@@ -44,7 +44,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 15,
+      "column": 14,
       "line": 1,
     },
     "type": "identifier",
@@ -52,7 +52,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 17,
+      "column": 16,
       "line": 1,
     },
     "type": "operator",
@@ -60,7 +60,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 19,
+      "column": 18,
       "line": 1,
     },
     "type": "identifier",
@@ -77,11 +77,11 @@ Array [
       "line": 1,
     },
     "type": "keyword",
-    "value": "func",
+    "value": "fun",
   },
   Object {
     "loc": Object {
-      "column": 5,
+      "column": 4,
       "line": 1,
     },
     "type": "identifier",
@@ -89,7 +89,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 9,
+      "column": 8,
       "line": 1,
     },
     "type": "identifier",
@@ -97,7 +97,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 11,
+      "column": 10,
       "line": 1,
     },
     "type": "identifier",
@@ -105,7 +105,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 13,
+      "column": 12,
       "line": 1,
     },
     "type": "operator",
@@ -113,7 +113,7 @@ Array [
   },
   Object {
     "loc": Object {
-      "column": 15,
+      "column": 14,
       "line": 1,
     },
     "type": "braces",

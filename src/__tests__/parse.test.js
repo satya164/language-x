@@ -77,33 +77,33 @@ it('parses let declaration', () => {
 it('parses function declaration', () => {
   expect(
     parse(dedent`
-    func calc a b c = a + b * c
-    func foo a add = add a
-    func foo = show "hello world"
+    fun calc a b c = a + b * c
+    fun foo a add = add a
+    fun foo = show "hello world"
   `)
   ).toMatchSnapshot();
 
   expect(
     parse(dedent`
-    func add a b = {
+    fun add a b = {
       let c = a + b
 
       return c
     }
 
-    func foo = add 3 4
+    fun foo = add 3 4
   `)
   ).toMatchSnapshot();
 
   expect(() =>
     parse(dedent`
-    func foo "hello world" = show test
+    fun foo "hello world" = show test
     `)
   ).toThrowErrorMatchingSnapshot();
 
   expect(() =>
     parse(dedent`
-    func foo = bar | baz
+    fun foo = bar | baz
     `)
   ).toThrowErrorMatchingSnapshot();
 });

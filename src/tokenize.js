@@ -68,7 +68,7 @@ const keywords = {
   return: true,
   type: true,
   let: true,
-  func: true,
+  fun: true,
 };
 
 module.exports = function tokenize(
