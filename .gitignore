@@ -2,6 +2,7 @@
 .cache
 .vscode
 
-/lib/
-/dist/
 /node_modules/
+/coverage/
+/dist/
+/lib/
