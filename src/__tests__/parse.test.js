@@ -1,6 +1,7 @@
 /* @flow */
 
 const print = require('ast-pretty-print');
+const dedent = require('dedent');
 const parse = require('../parse');
 
 expect.addSnapshotSerializer({
@@ -10,7 +11,7 @@ expect.addSnapshotSerializer({
 
 it('parses type declaration', () => {
   expect(
-    parse(`
+    parse(dedent`
     type Foo = Bar
     type Bar = Boolean | String | Number
     type Maybe Number = Nothing | Number
@@ -21,7 +22,7 @@ it('parses type declaration', () => {
 
 it('parses let declaration', () => {
   expect(
-    parse(`
+    parse(dedent`
     let foo = 10
     let bar = "Hello world"
   `)
@@ -30,7 +31,7 @@ it('parses let declaration', () => {
 
 it('parses function declaration', () => {
   expect(
-    parse(`
+    parse(dedent`
     func calc a b c = a + b * c
     func foo a add = add a
   `)
@@ -39,7 +40,7 @@ it('parses function declaration', () => {
 
 it('parses math expression', () => {
   expect(
-    parse(`
+    parse(dedent`
     let a = 10 * 30 + a - 20 / foo
   `)
   ).toMatchSnapshot();

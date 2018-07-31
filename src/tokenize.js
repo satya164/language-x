@@ -68,8 +68,8 @@ const keywords = ['type', 'let', 'func'];
 module.exports = function tokenize(code: string): Token[] {
   const tokens: Token[] = [];
 
-  let line = 0;
-  let column = 0;
+  let line = 1; // lines start at 1
+  let column = -1; // columns start at 0, use -1 to offset initial increment
 
   let string = false;
 
@@ -78,7 +78,7 @@ module.exports = function tokenize(code: string): Token[] {
 
     if (char === '\n') {
       line++;
-      column = 0;
+      column = -1;
     } else {
       column++;
     }

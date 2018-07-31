@@ -1,5 +1,6 @@
 /* @flow */
 
+const tokenize = require('./tokenize');
 const {
   TypeDeclaration,
   LetDeclaration,
@@ -12,8 +13,6 @@ const {
   UnionOperation,
   MathExpression,
 } = require('./types');
-
-const tokenize = require('./tokenize');
 
 const error = token =>
   new Error(
