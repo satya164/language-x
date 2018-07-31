@@ -37,7 +37,7 @@ Node "Program" (1:0)
             Node "Identifier" (2:11)
               name: "add",
           ]
-        right: Node "ParameterExpression" (2:17)
+        right: Node "InstantiationExpression" (2:17)
           id: Node "Identifier" (2:17)
             name: "add"
           params: Array [
@@ -48,7 +48,7 @@ Node "Program" (1:0)
       value: Node "AssignmentExpression" (3:5)
         left: Node "Identifier" (3:5)
           name: "foo"
-        right: Node "ParameterExpression" (3:11)
+        right: Node "InstantiationExpression" (3:11)
           id: Node "Identifier" (3:11)
             name: "show"
           params: Array [
@@ -92,21 +92,21 @@ Node "Program" (1:0)
       value: Node "AssignmentExpression" (7:5)
         left: Node "Identifier" (7:5)
           name: "foo"
-        right: Node "ParameterExpression" (7:11)
+        right: Node "InstantiationExpression" (7:11)
           id: Node "Identifier" (7:11)
-            name: "show"
+            name: "add"
           params: Array [
-            Node "StringLiteral" (7:16)
-              value: "\\"hello world",
+            Node "NumericLiteral" (7:15)
+              value: 3,
+            Node "NumericLiteral" (7:17)
+              value: 4,
           ],
   ]
 `;
 
-exports[`parses function declaration 3`] = `"Expected Identifier or ParameterExpression, but got StringLiteral"`;
+exports[`parses function declaration 3`] = `"Expected AssignmentExpression, but got Identifier"`;
 
-exports[`parses function declaration 4`] = `"Syntax error: unexpected identifier \\"test\\" at 1:30"`;
-
-exports[`parses function declaration 5`] = `"Expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral or BlockStatement, but got UnionOperation"`;
+exports[`parses function declaration 4`] = `"Expected Identifier or InstantiationExpression or MathExpression or StringLiteral or NumericLiteral or BlockStatement, but got UnionOperation"`;
 
 exports[`parses let declaration 1`] = `
 Node "Program" (1:0)
@@ -126,9 +126,9 @@ Node "Program" (1:0)
   ]
 `;
 
-exports[`parses let declaration 2`] = `"Expected Identifier, but got ParameterExpression"`;
+exports[`parses let declaration 2`] = `"Expected AssignmentExpression, but got Identifier"`;
 
-exports[`parses let declaration 3`] = `"Expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
+exports[`parses let declaration 3`] = `"Expected Identifier or InstantiationExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
 
 exports[`parses main declaration 1`] = `
 Node "Program" (1:0)
@@ -143,7 +143,7 @@ exports[`parses main declaration 2`] = `
 Node "Program" (1:0)
   body: Array [
     Node "MainDeclaration" (1:0)
-      value: Node "ParameterExpression" (1:5)
+      value: Node "InstantiationExpression" (1:5)
         id: Node "Identifier" (1:5)
           name: "Foo"
         params: Array [
@@ -155,7 +155,7 @@ Node "Program" (1:0)
 
 exports[`parses main declaration 3`] = `"Syntax error: duplicate keyword \\"main\\" at 2:0"`;
 
-exports[`parses main declaration 4`] = `"Expected Identifier or ParameterExpression, but got AssignmentExpression"`;
+exports[`parses main declaration 4`] = `"Expected Identifier or InstantiationExpression, but got AssignmentExpression"`;
 
 exports[`parses math expression 1`] = `
 Node "Program" (1:0)
@@ -231,7 +231,7 @@ Node "Program" (1:0)
       value: Node "AssignmentExpression" (4:5)
         left: Node "Identifier" (4:5)
           name: "Users"
-        right: Node "ParameterExpression" (4:13)
+        right: Node "InstantiationExpression" (4:13)
           id: Node "Identifier" (4:13)
             name: "List"
           params: Array [
@@ -241,4 +241,4 @@ Node "Program" (1:0)
   ]
 `;
 
-exports[`parses type declaration 2`] = `"Expected Identifier or ParameterExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;
+exports[`parses type declaration 2`] = `"Expected Identifier or InstantiationExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;

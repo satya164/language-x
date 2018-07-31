@@ -11,6 +11,7 @@ const {
   ReturnStatement,
   BlockStatement,
   ParameterExpression,
+  InstantiationExpression,
   AssignmentExpression,
   MathExpression,
   UnionOperation,
@@ -88,6 +89,10 @@ const expression = (token, peek, back) => {
       return statement(token, peek, back);
     }
 
+    // Look at previous token to determine type of the expression
+    const prev = back();
+    peek(); // restore the index after going back
+
     // Lookahead to determine the type of the expression
     let next = peek();
     let expr;
@@ -105,36 +110,69 @@ const expression = (token, peek, back) => {
       throw error(token);
     }
 
-    while (next && next.type === 'identifier') {
-      // If the identifier is followed by more identifiers, it's parameter expression
-      // For the first identifier, create our expression node
-      // For later identifiers, add them to params
-      expr = Identifier.check(expr)
-        ? ParameterExpression.create({ id: expr, params: [] }, token.loc)
-        : expr;
+    // Look at previous token to determine if it's a call expression or parameter expression
+    // If it was started after type, func, it's a parameter expression
+    if (
+      prev &&
+      prev.type === 'keyword' &&
+      (prev.value === 'type' || prev.value === 'func')
+    ) {
+      while (next && next.type === 'identifier') {
+        // If the identifier is followed by more identifiers, it's parameter expression
+        // For the first identifier, create our expression node
+        // For later identifiers, add them to params
+        expr = ParameterExpression.check(expr)
+          ? expr
+          : ParameterExpression.create({ id: expr, params: [] }, token.loc);
 
-      if (ParameterExpression.check(expr)) {
         expr.params.push(Identifier.create({ name: next.value }, next.loc));
-      } else {
-        throw error(next);
-      }
 
-      next = peek();
+        next = peek();
+      }
+    } else if (
+      prev && prev.type === 'keyword'
+        ? prev.value === 'main' || prev.value === 'return'
+        : true
+    ) {
+      while (
+        next &&
+        (next.type === 'identifier' ||
+          next.type === 'string' ||
+          next.type === 'number')
+      ) {
+        // If the identifier is followed by more identifiers or literals, it's an instantiation
+        // For the first identifier, create our expression node
+        // For later identifiers or literals, add them to params
+        expr = InstantiationExpression.check(expr)
+          ? expr
+          : InstantiationExpression.create({ id: expr, params: [] }, token.loc);
+
+        if (InstantiationExpression.check(expr)) {
+          let node;
+
+          if (next.type === 'string') {
+            node = StringLiteral.create({ value: next.value }, next.loc);
+          } else if (next.type === 'number') {
+            node = NumericLiteral.create(
+              { value: parseFloat(next.value) },
+              next.loc
+            );
+          } else if (next.type === 'identifier') {
+            node = Identifier.create({ name: next.value }, next.loc);
+          }
+
+          expr.params.push(node);
+        } else {
+          throw error(next);
+        }
+
+        next = peek();
+      }
+    } else {
+      error(token);
     }
 
-    if (next && (next.type === 'string' || next.type === 'number')) {
-      // If the identifier is followed by a string ot number, it's parameter expression
-      // Unlike identifiers, these can only be at the end
-      expr = Identifier.check(expr)
-        ? ParameterExpression.create({ id: expr, params: [] }, token.loc)
-        : expr;
-
-      if (ParameterExpression.check(expr)) {
-        expr.params.push(expression(next, peek, back));
-      } else {
-        throw error(next);
-      }
-    } else if (next && next.type === 'operator') {
+    if (next && next.type === 'operator') {
       if (next.value === '=') {
         // If we encounter the assignment operator, assume assignment expression
         // Assign the current expression to the left side and continue parsing the right side of assignment
@@ -225,6 +263,7 @@ module.exports = function parse(code: string) {
     };
     const back = () => {
       i--;
+      return tokens[i];
     };
 
     if (token.type === 'keyword' && token.value === 'main') {

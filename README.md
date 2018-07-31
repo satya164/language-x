@@ -41,7 +41,7 @@ func add a b = {
 Functions can be called like:
 
 ```
-show "hello world"
+let result = add 3 4
 ```
 
 ## Type system

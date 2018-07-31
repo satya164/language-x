@@ -91,19 +91,13 @@ it('parses function declaration', () => {
       return c
     }
 
-    func foo = show "hello world"
+    func foo = add 3 4
   `)
   ).toMatchSnapshot();
 
   expect(() =>
     parse(dedent`
     func foo "hello world" = show test
-    `)
-  ).toThrowErrorMatchingSnapshot();
-
-  expect(() =>
-    parse(dedent`
-    func foo = show "hello world" test
     `)
   ).toThrowErrorMatchingSnapshot();
 
