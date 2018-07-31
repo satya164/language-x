@@ -8,6 +8,8 @@ const {
   TypeDeclaration,
   LetDeclaration,
   FunctionDeclaration,
+  ReturnStatement,
+  BlockStatement,
   ParameterExpression,
   AssignmentExpression,
   MathExpression,
@@ -23,43 +25,69 @@ const error = token =>
     }:${token.loc.column}`
   );
 
-const declaration = (token, peek, end) => {
+const statement = (token, peek, back) => {
   if (token && token.type === 'keyword') {
     switch (token.value) {
       case 'main':
         return MainDeclaration.create(
-          { value: expression(peek(), peek, end) },
+          { value: expression(peek(), peek, back) },
           token.loc
         );
 
       case 'type':
         return TypeDeclaration.create(
-          { value: expression(peek(), peek, end) },
+          { value: expression(peek(), peek, back) },
           token.loc
         );
 
       case 'let':
         return LetDeclaration.create(
-          { value: expression(peek(), peek, end) },
+          { value: expression(peek(), peek, back) },
           token.loc
         );
 
       case 'func':
         return FunctionDeclaration.create(
-          { value: expression(peek(), peek, end) },
+          { value: expression(peek(), peek, back) },
+          token.loc
+        );
+
+      case 'return':
+        return ReturnStatement.create(
+          { value: expression(peek(), peek, back) },
           token.loc
         );
 
       default:
         throw error(token);
     }
+  } else if (token && token.type === 'braces' && token.value === '{') {
+    const body = [];
+
+    let next = peek();
+
+    while (
+      next &&
+      next.type === 'keyword' &&
+      (next.value === 'type' || next.value === 'let' || next.value === 'return')
+    ) {
+      body.push(statement(next, peek, back));
+
+      next = peek();
+    }
+
+    return BlockStatement.create({ body }, token.loc);
   } else if (token) {
     throw error(token);
   }
 };
 
-const expression = (token, peek, end) => {
+const expression = (token, peek, back) => {
   if (token) {
+    if (token.type === 'braces') {
+      return statement(token, peek, back);
+    }
+
     // Lookahead to determine the type of the expression
     let next = peek();
     let expr;
@@ -102,7 +130,7 @@ const expression = (token, peek, end) => {
         : expr;
 
       if (ParameterExpression.check(expr)) {
-        expr.params.push(expression(next, peek, end));
+        expr.params.push(expression(next, peek, back));
       } else {
         throw error(next);
       }
@@ -111,7 +139,7 @@ const expression = (token, peek, end) => {
         // If we encounter the assignment operator, assume assignment expression
         // Assign the current expression to the left side and continue parsing the right side of assignment
         expr = AssignmentExpression.create(
-          { left: expr, right: expression(peek(), peek, end) },
+          { left: expr, right: expression(peek(), peek, back) },
           token.loc
         );
       } else if (next.value === '|') {
@@ -136,7 +164,7 @@ const expression = (token, peek, end) => {
 
               return next;
             },
-            end
+            back
           );
 
           if (value) {
@@ -158,7 +186,7 @@ const expression = (token, peek, end) => {
         expr = MathExpression.create(
           {
             left: expr,
-            right: expression(peek(), peek, end),
+            right: expression(peek(), peek, back),
             operator: next.value,
           },
           token.loc
@@ -166,9 +194,14 @@ const expression = (token, peek, end) => {
       }
     }
 
-    if (next && next.type === 'keyword') {
-      // When we encounter a keyword, we end the statement
-      end();
+    if (
+      next &&
+      (next.type === 'keyword' ||
+        (next.type === 'braces' && next.value === '}'))
+    ) {
+      // We end the statement when we find a keyword or end of a block
+      // Move a step back to start parsing from the keyword
+      back();
     }
 
     return expr;
@@ -190,7 +223,7 @@ module.exports = function parse(code: string) {
       i++;
       return tokens[i];
     };
-    const end = () => {
+    const back = () => {
       i--;
     };
 
@@ -206,7 +239,7 @@ module.exports = function parse(code: string) {
       main = true;
     }
 
-    body.push(declaration(token, peek, end));
+    body.push(statement(token, peek, back));
   }
 
   return Program.create({ body }, { line: 1, column: 0 });

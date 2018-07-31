@@ -58,11 +58,55 @@ Node "Program" (1:0)
   ]
 `;
 
-exports[`parses function declaration 2`] = `"Expected Identifier or ParameterExpression, but got StringLiteral"`;
+exports[`parses function declaration 2`] = `
+Node "Program" (1:0)
+  body: Array [
+    Node "FunctionDeclaration" (1:0)
+      value: Node "AssignmentExpression" (1:5)
+        left: Node "ParameterExpression" (1:5)
+          id: Node "Identifier" (1:5)
+            name: "add"
+          params: Array [
+            Node "Identifier" (1:9)
+              name: "a",
+            Node "Identifier" (1:11)
+              name: "b",
+          ]
+        right: Node "BlockStatement" (1:15)
+          body: Array [
+            Node "LetDeclaration" (2:2)
+              value: Node "AssignmentExpression" (2:6)
+                left: Node "Identifier" (2:6)
+                  name: "c"
+                right: Node "MathExpression" (2:10)
+                  left: Node "Identifier" (2:10)
+                    name: "a"
+                  operator: "+"
+                  right: Node "Identifier" (2:14)
+                    name: "b",
+            Node "ReturnStatement" (4:2)
+              value: Node "Identifier" (4:9)
+                name: "c",
+          ],
+    Node "FunctionDeclaration" (7:0)
+      value: Node "AssignmentExpression" (7:5)
+        left: Node "Identifier" (7:5)
+          name: "foo"
+        right: Node "ParameterExpression" (7:11)
+          id: Node "Identifier" (7:11)
+            name: "show"
+          params: Array [
+            Node "StringLiteral" (7:16)
+              value: "\\"hello world",
+          ],
+  ]
+`;
 
-exports[`parses function declaration 3`] = `"Syntax error: unexpected identifier \\"test\\" at 1:30"`;
+exports[`parses function declaration 3`] = `"Expected Identifier or ParameterExpression, but got StringLiteral"`;
 
-exports[`parses function declaration 4`] = `"Expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
+exports[`parses function declaration 4`] = `"Syntax error: unexpected identifier \\"test\\" at 1:30"`;
+
+exports[`parses function declaration 5`] = `"Expected Identifier or ParameterExpression or MathExpression or StringLiteral or NumericLiteral or BlockStatement, but got UnionOperation"`;
 
 exports[`parses let declaration 1`] = `
 Node "Program" (1:0)

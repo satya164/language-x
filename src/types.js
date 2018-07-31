@@ -87,6 +87,22 @@ const FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => {
     ParameterExpression,
     MathExpression,
     StringLiteral,
+    NumericLiteral,
+    BlockStatement
+  );
+
+  return {
+    value,
+  };
+});
+
+const ReturnStatement = helper('ReturnStatement', ({ value }: *) => {
+  assert(
+    value,
+    Identifier,
+    ParameterExpression,
+    MathExpression,
+    StringLiteral,
     NumericLiteral
   );
 
@@ -95,12 +111,24 @@ const FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => {
   };
 });
 
+const BlockStatement = helper('BlockStatement', ({ body }: *) => {
+  body.forEach(node =>
+    assert(node, TypeDeclaration, LetDeclaration, ReturnStatement)
+  );
+
+  return {
+    body,
+  };
+});
+
 const ParameterExpression = helper(
   'ParameterExpression',
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
-    params.forEach(p => assert(p, Identifier, StringLiteral, NumericLiteral));
+    params.forEach(node =>
+      assert(node, Identifier, StringLiteral, NumericLiteral)
+    );
 
     return {
       id,
@@ -116,11 +144,13 @@ const AssignmentExpression = helper(
     assert(
       right,
       Identifier,
+      LetDeclaration,
       ParameterExpression,
       MathExpression,
       UnionOperation,
       StringLiteral,
-      NumericLiteral
+      NumericLiteral,
+      BlockStatement
     );
 
     return {
@@ -159,8 +189,8 @@ const MathExpression = helper(
 );
 
 const UnionOperation = helper('UnionOperation', ({ values }: { values: * }) => {
-  values.forEach(v =>
-    assert(v, Identifier, ParameterExpression, StringLiteral, NumericLiteral)
+  values.forEach(node =>
+    assert(node, Identifier, ParameterExpression, StringLiteral, NumericLiteral)
   );
 
   return {
@@ -187,7 +217,9 @@ exports.Identifier = Identifier;
 exports.MainDeclaration = MainDeclaration;
 exports.TypeDeclaration = TypeDeclaration;
 exports.LetDeclaration = LetDeclaration;
+exports.ReturnStatement = ReturnStatement;
 exports.FunctionDeclaration = FunctionDeclaration;
+exports.BlockStatement = BlockStatement;
 exports.ParameterExpression = ParameterExpression;
 exports.AssignmentExpression = AssignmentExpression;
 exports.MathExpression = MathExpression;

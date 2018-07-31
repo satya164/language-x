@@ -28,10 +28,20 @@ Functions are defined with the `func` keyword:
 func add a b = a + b
 ```
 
+Functions can also contain multiple statements:
+
+```
+func add a b = {
+  let c = a + b
+
+  return c
+}
+```
+
 Functions can be called like:
 
 ```
-add 3 4
+show "hello world"
 ```
 
 ## Type system

@@ -35,6 +35,12 @@ type String = {
   loc: Location,
 };
 
+type Braces = {
+  type: 'braces',
+  value: '{' | '}',
+  loc: Location,
+};
+
 type Whitespace = {
   type: 'whitespace',
   value: string,
@@ -53,11 +59,13 @@ type Token =
   | Identifier
   | Number
   | String
+  | Braces
   | Whitespace
   | Newline;
 
 const keywords = {
   main: true,
+  return: true,
   type: true,
   let: true,
   func: true,
@@ -135,6 +143,14 @@ module.exports = function tokenize(
             loc: { line, column },
           });
         }
+        break;
+      case '{':
+      case '}':
+        tokens.push({
+          type: 'braces',
+          value: char,
+          loc: { line, column },
+        });
         break;
       case '|':
       case '=':

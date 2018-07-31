@@ -83,6 +83,18 @@ it('parses function declaration', () => {
   `)
   ).toMatchSnapshot();
 
+  expect(
+    parse(dedent`
+    func add a b = {
+      let c = a + b
+
+      return c
+    }
+
+    func foo = show "hello world"
+  `)
+  ).toMatchSnapshot();
+
   expect(() =>
     parse(dedent`
     func foo "hello world" = show test

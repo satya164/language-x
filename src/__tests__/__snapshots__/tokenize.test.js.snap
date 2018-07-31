@@ -69,6 +69,99 @@ Array [
 ]
 `;
 
+exports[`tokenizes function declaration 2`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 1,
+    },
+    "type": "keyword",
+    "value": "func",
+  },
+  Object {
+    "loc": Object {
+      "column": 5,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "add",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 11,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "b",
+  },
+  Object {
+    "loc": Object {
+      "column": 13,
+      "line": 1,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 15,
+      "line": 1,
+    },
+    "type": "braces",
+    "value": "{",
+  },
+  Object {
+    "loc": Object {
+      "column": 2,
+      "line": 2,
+    },
+    "type": "keyword",
+    "value": "return",
+  },
+  Object {
+    "loc": Object {
+      "column": 9,
+      "line": 2,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 11,
+      "line": 2,
+    },
+    "type": "operator",
+    "value": "+",
+  },
+  Object {
+    "loc": Object {
+      "column": 13,
+      "line": 2,
+    },
+    "type": "identifier",
+    "value": "b",
+  },
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 3,
+    },
+    "type": "braces",
+    "value": "}",
+  },
+]
+`;
+
 exports[`tokenizes let declaration 1`] = `
 Array [
   Object {

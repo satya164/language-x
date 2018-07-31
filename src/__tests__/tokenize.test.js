@@ -35,6 +35,14 @@ it('tokenizes function declaration', () => {
     func add a b = a + b
   `)
   ).toMatchSnapshot();
+
+  expect(
+    tokenize(dedent`
+    func add a b = {
+      return a + b
+    }
+  `)
+  ).toMatchSnapshot();
 });
 
 it('tokenizes various types of numbers', () => {
