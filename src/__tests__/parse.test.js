@@ -57,7 +57,8 @@ it('parses let declaration', () => {
   expect(
     parse(dedent`
     let foo = 10
-    let bar = "Hello world"
+    let bar = true
+    let baz = "Hello world"
   `)
   ).toMatchSnapshot();
 

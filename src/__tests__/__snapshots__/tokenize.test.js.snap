@@ -1,5 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`tokenizes booleans 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 1,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 1,
+    },
+    "type": "identifier",
+    "value": "a",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 1,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 1,
+    },
+    "type": "boolean",
+    "value": "true",
+  },
+  Object {
+    "loc": Object {
+      "column": 0,
+      "line": 2,
+    },
+    "type": "keyword",
+    "value": "let",
+  },
+  Object {
+    "loc": Object {
+      "column": 4,
+      "line": 2,
+    },
+    "type": "identifier",
+    "value": "b",
+  },
+  Object {
+    "loc": Object {
+      "column": 6,
+      "line": 2,
+    },
+    "type": "operator",
+    "value": "=",
+  },
+  Object {
+    "loc": Object {
+      "column": 8,
+      "line": 2,
+    },
+    "type": "boolean",
+    "value": "false",
+  },
+]
+`;
+
 exports[`tokenizes function declaration 1`] = `
 Array [
   Object {

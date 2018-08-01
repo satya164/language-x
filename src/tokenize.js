@@ -23,6 +23,12 @@ type Identifier = {
   loc: Location,
 };
 
+type Boolean = {
+  type: 'boolean',
+  value: 'true' | 'false',
+  loc: Location,
+};
+
 type Number = {
   type: 'number',
   value: string,
@@ -75,6 +81,7 @@ type Token =
   | Keyword
   | Operator
   | Identifier
+  | Boolean
   | Number
   | String
   | Braces
@@ -234,6 +241,17 @@ module.exports = function tokenize(
             // Check for identifiers and keywords
             if (last && last.type === 'identifier') {
               last.value += char;
+
+              // We need to lookahead to determine if it's a boolean
+              const next = code.charAt(i + 1);
+
+              // If the next character is whitespace or end of the file, check if the identifier is boolean
+              if (/(\n|\t|\s)/.test(next) || i === l - 1) {
+                if (last.value === 'true' || last.value === 'false') {
+                  /* $FlowFixMe */
+                  last.type = 'boolean';
+                }
+              }
             } else {
               tokens.push({
                 type: 'identifier',

@@ -45,6 +45,15 @@ it('tokenizes function declaration', () => {
   ).toMatchSnapshot();
 });
 
+it('tokenizes booleans', () => {
+  expect(
+    tokenize(dedent`
+    let a = true
+    let b = false
+  `)
+  ).toMatchSnapshot();
+});
+
 it('tokenizes various types of numbers', () => {
   expect(
     tokenize(dedent`

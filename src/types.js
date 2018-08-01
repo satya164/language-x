@@ -52,8 +52,7 @@ const TypeDeclaration = helper('TypeDeclaration', ({ value }: *) => {
     Identifier,
     TypeInstantiationExpression,
     UnionOperation,
-    StringLiteral,
-    NumericLiteral
+    ...Literals
   );
 
   return {
@@ -69,8 +68,7 @@ const LetDeclaration = helper('LetDeclaration', ({ value }: *) => {
     Identifier,
     FunctionCallExpression,
     MathExpression,
-    StringLiteral,
-    NumericLiteral
+    ...Literals
   );
 
   return {
@@ -86,9 +84,8 @@ const FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => {
     Identifier,
     FunctionCallExpression,
     MathExpression,
-    StringLiteral,
-    NumericLiteral,
-    BlockStatement
+    BlockStatement,
+    ...Literals
   );
 
   return {
@@ -102,8 +99,7 @@ const ReturnStatement = helper('ReturnStatement', ({ value }: *) => {
     Identifier,
     FunctionCallExpression,
     MathExpression,
-    StringLiteral,
-    NumericLiteral
+    ...Literals
   );
 
   return {
@@ -126,9 +122,7 @@ const FunctionParameterExpression = helper(
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
-    params.forEach(node =>
-      assert(node, Identifier, StringLiteral, NumericLiteral)
-    );
+    params.forEach(node => assert(node, Identifier, ...Literals));
 
     return {
       id,
@@ -142,9 +136,7 @@ const TypeParameterExpression = helper(
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
-    params.forEach(node =>
-      assert(node, Identifier, StringLiteral, NumericLiteral)
-    );
+    params.forEach(node => assert(node, Identifier, ...Literals));
 
     return {
       id,
@@ -158,9 +150,7 @@ const FunctionCallExpression = helper(
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
-    params.forEach(node =>
-      assert(node, Identifier, StringLiteral, NumericLiteral)
-    );
+    params.forEach(node => assert(node, Identifier, ...Literals));
 
     return {
       id,
@@ -174,9 +164,7 @@ const TypeInstantiationExpression = helper(
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
-    params.forEach(node =>
-      assert(node, Identifier, StringLiteral, NumericLiteral)
-    );
+    params.forEach(node => assert(node, Identifier, ...Literals));
 
     return {
       id,
@@ -202,9 +190,8 @@ const AssignmentExpression = helper(
       TypeInstantiationExpression,
       MathExpression,
       UnionOperation,
-      StringLiteral,
-      NumericLiteral,
-      BlockStatement
+      BlockStatement,
+      ...Literals
     );
 
     return {
@@ -244,13 +231,7 @@ const MathExpression = helper(
 
 const UnionOperation = helper('UnionOperation', ({ values }: { values: * }) => {
   values.forEach(node =>
-    assert(
-      node,
-      Identifier,
-      TypeInstantiationExpression,
-      StringLiteral,
-      NumericLiteral
-    )
+    assert(node, Identifier, TypeInstantiationExpression, ...Literals)
   );
 
   return {
@@ -265,12 +246,21 @@ const StringLiteral = helper(
   })
 );
 
+const BooleanLiteral = helper(
+  'BooleanLiteral',
+  ({ value }: { value: boolean }) => ({
+    value,
+  })
+);
+
 const NumericLiteral = helper(
   'NumericLiteral',
   ({ value }: { value: number }) => ({
     value,
   })
 );
+
+const Literals = [StringLiteral, BooleanLiteral, NumericLiteral];
 
 exports.Program = Program;
 exports.Identifier = Identifier;
@@ -288,4 +278,5 @@ exports.AssignmentExpression = AssignmentExpression;
 exports.MathExpression = MathExpression;
 exports.UnionOperation = UnionOperation;
 exports.StringLiteral = StringLiteral;
+exports.BooleanLiteral = BooleanLiteral;
 exports.NumericLiteral = NumericLiteral;

@@ -19,6 +19,7 @@ const {
   UnionOperation,
   StringLiteral,
   NumericLiteral,
+  BooleanLiteral,
 } = require('./types');
 
 const eof = token =>
@@ -111,6 +112,11 @@ const expression = (token, peek, back) => {
         { value: parseFloat(token.value) },
         token.loc
       );
+    } else if (token.type === 'boolean') {
+      expr = BooleanLiteral.create(
+        { value: token.value === 'true' },
+        token.loc
+      );
     } else if (token.type === 'identifier') {
       expr = Identifier.create({ name: token.value }, token.loc);
     }
@@ -189,7 +195,8 @@ const expression = (token, peek, back) => {
         next &&
         (next.type === 'identifier' ||
           next.type === 'string' ||
-          next.type === 'number')
+          next.type === 'number' ||
+          next.type === 'boolean')
       ) {
         let node;
 
@@ -198,6 +205,11 @@ const expression = (token, peek, back) => {
         } else if (token.type === 'number') {
           node = NumericLiteral.create(
             { value: parseFloat(next.value) },
+            next.loc
+          );
+        } else if (token.type === 'boolean') {
+          node = BooleanLiteral.create(
+            { value: next.value === 'true' },
             next.loc
           );
         } else if (next.type === 'identifier') {
@@ -229,7 +241,8 @@ const expression = (token, peek, back) => {
         next &&
         (next.type === 'identifier' ||
           next.type === 'string' ||
-          next.type === 'number')
+          next.type === 'number' ||
+          next.type === 'boolean')
       ) {
         let node;
 
@@ -238,6 +251,11 @@ const expression = (token, peek, back) => {
         } else if (next.type === 'number') {
           node = NumericLiteral.create(
             { value: parseFloat(next.value) },
+            next.loc
+          );
+        } else if (token.type === 'boolean') {
+          node = BooleanLiteral.create(
+            { value: next.value === 'true' },
             next.loc
           );
         } else if (next.type === 'identifier') {
