@@ -9,8 +9,10 @@ const {
   FunctionDeclaration,
   ReturnStatement,
   BlockStatement,
-  ParameterExpression,
-  InstantiationExpression,
+  FunctionParameterExpression,
+  TypeParameterExpression,
+  FunctionCallExpression,
+  TypeInstantiationExpression,
   AssignmentExpression,
   MathExpression,
   UnionOperation,
@@ -21,13 +23,18 @@ const {
 module.exports = function compile(node: *) {
   switch (node.type) {
     case Program.name:
-      return `'use strict';\n\n${node.body.map(compile).join('\n\n')}`;
+      return `'use strict';\n\n${node.body
+        .map(compile)
+        .filter(Boolean)
+        .join('\n\n')}`;
 
     case MainDeclaration.name:
       return compile(node.value);
 
     case TypeDeclaration.name:
     case UnionOperation.name:
+    case TypeParameterExpression.name:
+    case TypeInstantiationExpression.name:
       return '';
 
     case LetDeclaration.name:
@@ -48,12 +55,12 @@ module.exports = function compile(node: *) {
     case BlockStatement.name:
       return `{\n${node.body.map(n => `  ${compile(n)}`).join('\n\n')}\n}`;
 
-    case ParameterExpression.name:
+    case FunctionParameterExpression.name:
       return `${compile(node.id)}(${node.params
         .map(n => compile(n))
         .join(', ')})`;
 
-    case InstantiationExpression.name:
+    case FunctionCallExpression.name:
       return `${compile(node.id)}(${node.params
         .map(n => compile(n))
         .join(', ')});`;

@@ -10,8 +10,10 @@ const {
   FunctionDeclaration,
   ReturnStatement,
   BlockStatement,
-  ParameterExpression,
-  InstantiationExpression,
+  FunctionParameterExpression,
+  TypeParameterExpression,
+  FunctionCallExpression,
+  TypeInstantiationExpression,
   AssignmentExpression,
   MathExpression,
   UnionOperation,
@@ -122,54 +124,96 @@ const expression = (token, peek, back) => {
       prev.type === 'keyword' &&
       (prev.value === 'type' || prev.value === 'fun')
     ) {
-      while (next && next.type === 'identifier') {
-        // If the identifier is followed by more identifiers, it's parameter expression
-        // For the first identifier, create our expression node
-        // For later identifiers, add them to params
-        expr = ParameterExpression.check(expr)
-          ? expr
-          : ParameterExpression.create({ id: expr, params: [] }, token.loc);
+      if (prev.value === 'type') {
+        while (next && next.type === 'identifier') {
+          // If the identifier is followed by more identifiers, it's parameter expression
+          // For the first identifier, create our expression node
+          // For later identifiers, add them to params
+          expr = TypeParameterExpression.check(expr)
+            ? expr
+            : TypeParameterExpression.create(
+                { id: expr, params: [] },
+                token.loc
+              );
 
-        expr.params.push(Identifier.create({ name: next.value }, next.loc));
+          expr.params.push(Identifier.create({ name: next.value }, next.loc));
 
-        next = peek();
+          next = peek();
+        }
+      } else if (prev.value === 'fun') {
+        while (next && next.type === 'identifier') {
+          // If the identifier is followed by more identifiers, it's parameter expression
+          // For the first identifier, create our expression node
+          // For later identifiers, add them to params
+          expr = FunctionParameterExpression.check(expr)
+            ? expr
+            : FunctionParameterExpression.create(
+                { id: expr, params: [] },
+                token.loc
+              );
+
+          expr.params.push(Identifier.create({ name: next.value }, next.loc));
+
+          next = peek();
+        }
       }
     } else if (
       prev && prev.type === 'keyword'
         ? prev.value === 'main' || prev.value === 'return'
         : true
     ) {
+      let times = 0;
+      let old = prev;
+
+      // Look back to determine if it's a type instantiation or a function call
+      while (old && old.type !== 'keyword' && old.type !== 'braces') {
+        old = back();
+        times++;
+      }
+
+      // Restore the index
+      while (times--) {
+        peek();
+      }
+
       while (
         next &&
         (next.type === 'identifier' ||
           next.type === 'string' ||
           next.type === 'number')
       ) {
-        // If the identifier is followed by more identifiers or literals, it's an instantiation
         // For the first identifier, create our expression node
         // For later identifiers or literals, add them to params
-        expr = InstantiationExpression.check(expr)
-          ? expr
-          : InstantiationExpression.create({ id: expr, params: [] }, token.loc);
-
-        if (InstantiationExpression.check(expr)) {
-          let node;
-
-          if (next.type === 'string') {
-            node = StringLiteral.create({ value: next.value }, next.loc);
-          } else if (next.type === 'number') {
-            node = NumericLiteral.create(
-              { value: parseFloat(next.value) },
-              next.loc
-            );
-          } else if (next.type === 'identifier') {
-            node = Identifier.create({ name: next.value }, next.loc);
-          }
-
-          expr.params.push(node);
+        if (old && old.type === 'keyword' && old.value === 'type') {
+          expr = TypeInstantiationExpression.check(expr)
+            ? expr
+            : TypeInstantiationExpression.create(
+                { id: expr, params: [] },
+                token.loc
+              );
         } else {
-          throw error(next);
+          expr = FunctionCallExpression.check(expr)
+            ? expr
+            : FunctionCallExpression.create(
+                { id: expr, params: [] },
+                token.loc
+              );
         }
+
+        let node;
+
+        if (next.type === 'string') {
+          node = StringLiteral.create({ value: next.value }, next.loc);
+        } else if (next.type === 'number') {
+          node = NumericLiteral.create(
+            { value: parseFloat(next.value) },
+            next.loc
+          );
+        } else if (next.type === 'identifier') {
+          node = Identifier.create({ name: next.value }, next.loc);
+        }
+
+        expr.params.push(node);
 
         next = peek();
       }

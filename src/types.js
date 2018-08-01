@@ -37,7 +37,7 @@ const Identifier = helper('Identifier', ({ name }: { name: string }) => ({
 }));
 
 const MainDeclaration = helper('MainDeclaration', ({ value }: *) => {
-  assert(value, Identifier, InstantiationExpression);
+  assert(value, Identifier, FunctionCallExpression);
 
   return {
     value,
@@ -46,11 +46,11 @@ const MainDeclaration = helper('MainDeclaration', ({ value }: *) => {
 
 const TypeDeclaration = helper('TypeDeclaration', ({ value }: *) => {
   assert(value, AssignmentExpression);
-  assert(value.left, Identifier, ParameterExpression);
+  assert(value.left, Identifier, TypeParameterExpression);
   assert(
     value.right,
     Identifier,
-    InstantiationExpression,
+    TypeInstantiationExpression,
     UnionOperation,
     StringLiteral,
     NumericLiteral
@@ -67,7 +67,7 @@ const LetDeclaration = helper('LetDeclaration', ({ value }: *) => {
   assert(
     value.right,
     Identifier,
-    InstantiationExpression,
+    FunctionCallExpression,
     MathExpression,
     StringLiteral,
     NumericLiteral
@@ -80,11 +80,11 @@ const LetDeclaration = helper('LetDeclaration', ({ value }: *) => {
 
 const FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => {
   assert(value, AssignmentExpression);
-  assert(value.left, Identifier, ParameterExpression);
+  assert(value.left, Identifier, FunctionParameterExpression);
   assert(
     value.right,
     Identifier,
-    InstantiationExpression,
+    FunctionCallExpression,
     MathExpression,
     StringLiteral,
     NumericLiteral,
@@ -100,7 +100,7 @@ const ReturnStatement = helper('ReturnStatement', ({ value }: *) => {
   assert(
     value,
     Identifier,
-    InstantiationExpression,
+    FunctionCallExpression,
     MathExpression,
     StringLiteral,
     NumericLiteral
@@ -121,8 +121,8 @@ const BlockStatement = helper('BlockStatement', ({ body }: *) => {
   };
 });
 
-const ParameterExpression = helper(
-  'ParameterExpression',
+const FunctionParameterExpression = helper(
+  'FunctionParameterExpression',
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
@@ -137,8 +137,40 @@ const ParameterExpression = helper(
   }
 );
 
-const InstantiationExpression = helper(
-  'InstantiationExpression',
+const TypeParameterExpression = helper(
+  'TypeParameterExpression',
+  ({ id, params }: { id: *, params: Array<*> }) => {
+    assert(id, Identifier);
+
+    params.forEach(node =>
+      assert(node, Identifier, StringLiteral, NumericLiteral)
+    );
+
+    return {
+      id,
+      params,
+    };
+  }
+);
+
+const FunctionCallExpression = helper(
+  'FunctionCallExpression',
+  ({ id, params }: { id: *, params: Array<*> }) => {
+    assert(id, Identifier);
+
+    params.forEach(node =>
+      assert(node, Identifier, StringLiteral, NumericLiteral)
+    );
+
+    return {
+      id,
+      params,
+    };
+  }
+);
+
+const TypeInstantiationExpression = helper(
+  'TypeInstantiationExpression',
   ({ id, params }: { id: *, params: Array<*> }) => {
     assert(id, Identifier);
 
@@ -156,12 +188,18 @@ const InstantiationExpression = helper(
 const AssignmentExpression = helper(
   'AssignmentExpression',
   ({ left, right }: { left: *, right: * }) => {
-    assert(left, Identifier, ParameterExpression);
+    assert(
+      left,
+      Identifier,
+      FunctionParameterExpression,
+      TypeParameterExpression
+    );
     assert(
       right,
       Identifier,
       LetDeclaration,
-      InstantiationExpression,
+      FunctionCallExpression,
+      TypeInstantiationExpression,
       MathExpression,
       UnionOperation,
       StringLiteral,
@@ -187,11 +225,11 @@ const MathExpression = helper(
     right: *,
     operator: '/' | '*' | '+' | '-',
   }) => {
-    assert(left, Identifier, ParameterExpression, NumericLiteral);
+    assert(left, Identifier, FunctionCallExpression, NumericLiteral);
     assert(
       right,
       Identifier,
-      InstantiationExpression,
+      FunctionCallExpression,
       MathExpression,
       NumericLiteral
     );
@@ -209,7 +247,7 @@ const UnionOperation = helper('UnionOperation', ({ values }: { values: * }) => {
     assert(
       node,
       Identifier,
-      InstantiationExpression,
+      TypeInstantiationExpression,
       StringLiteral,
       NumericLiteral
     )
@@ -242,8 +280,10 @@ exports.LetDeclaration = LetDeclaration;
 exports.ReturnStatement = ReturnStatement;
 exports.FunctionDeclaration = FunctionDeclaration;
 exports.BlockStatement = BlockStatement;
-exports.ParameterExpression = ParameterExpression;
-exports.InstantiationExpression = InstantiationExpression;
+exports.FunctionParameterExpression = FunctionParameterExpression;
+exports.TypeParameterExpression = TypeParameterExpression;
+exports.FunctionCallExpression = FunctionCallExpression;
+exports.TypeInstantiationExpression = TypeInstantiationExpression;
 exports.AssignmentExpression = AssignmentExpression;
 exports.MathExpression = MathExpression;
 exports.UnionOperation = UnionOperation;

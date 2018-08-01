@@ -8,6 +8,8 @@ it('compiles program to JavaScript', () => {
   expect(
     compile(
       parse(dedent`
+    type Foo Bar = Bar | Baz
+
     let a = 10 * 30 + b - 20 / foo
     let b = "Hello world"
 

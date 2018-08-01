@@ -5,7 +5,7 @@ Node "Program" (1:0)
   body: Array [
     Node "FunctionDeclaration" (1:0)
       value: Node "AssignmentExpression" (1:4)
-        left: Node "ParameterExpression" (1:4)
+        left: Node "FunctionParameterExpression" (1:4)
           id: Node "Identifier" (1:4)
             name: "calc"
           params: Array [
@@ -28,7 +28,7 @@ Node "Program" (1:0)
               name: "c",
     Node "FunctionDeclaration" (2:0)
       value: Node "AssignmentExpression" (2:4)
-        left: Node "ParameterExpression" (2:4)
+        left: Node "FunctionParameterExpression" (2:4)
           id: Node "Identifier" (2:4)
             name: "foo"
           params: Array [
@@ -37,7 +37,7 @@ Node "Program" (1:0)
             Node "Identifier" (2:10)
               name: "add",
           ]
-        right: Node "InstantiationExpression" (2:16)
+        right: Node "FunctionCallExpression" (2:16)
           id: Node "Identifier" (2:16)
             name: "add"
           params: Array [
@@ -48,7 +48,7 @@ Node "Program" (1:0)
       value: Node "AssignmentExpression" (3:4)
         left: Node "Identifier" (3:4)
           name: "foo"
-        right: Node "InstantiationExpression" (3:10)
+        right: Node "FunctionCallExpression" (3:10)
           id: Node "Identifier" (3:10)
             name: "show"
           params: Array [
@@ -63,7 +63,7 @@ Node "Program" (1:0)
   body: Array [
     Node "FunctionDeclaration" (1:0)
       value: Node "AssignmentExpression" (1:4)
-        left: Node "ParameterExpression" (1:4)
+        left: Node "FunctionParameterExpression" (1:4)
           id: Node "Identifier" (1:4)
             name: "add"
           params: Array [
@@ -92,7 +92,7 @@ Node "Program" (1:0)
       value: Node "AssignmentExpression" (7:4)
         left: Node "Identifier" (7:4)
           name: "foo"
-        right: Node "InstantiationExpression" (7:10)
+        right: Node "FunctionCallExpression" (7:10)
           id: Node "Identifier" (7:10)
             name: "add"
           params: Array [
@@ -106,7 +106,7 @@ Node "Program" (1:0)
 
 exports[`parses function declaration 3`] = `"Expected AssignmentExpression, but got Identifier"`;
 
-exports[`parses function declaration 4`] = `"Expected Identifier or InstantiationExpression or MathExpression or StringLiteral or NumericLiteral or BlockStatement, but got UnionOperation"`;
+exports[`parses function declaration 4`] = `"Expected Identifier or FunctionCallExpression or MathExpression or StringLiteral or NumericLiteral or BlockStatement, but got UnionOperation"`;
 
 exports[`parses function declaration 5`] = `"Syntax error: unexpected end of block at 1:10"`;
 
@@ -132,7 +132,7 @@ Node "Program" (1:0)
 
 exports[`parses let declaration 2`] = `"Expected AssignmentExpression, but got Identifier"`;
 
-exports[`parses let declaration 3`] = `"Expected Identifier or InstantiationExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
+exports[`parses let declaration 3`] = `"Expected Identifier or FunctionCallExpression or MathExpression or StringLiteral or NumericLiteral, but got UnionOperation"`;
 
 exports[`parses main declaration 1`] = `
 Node "Program" (1:0)
@@ -147,7 +147,7 @@ exports[`parses main declaration 2`] = `
 Node "Program" (1:0)
   body: Array [
     Node "MainDeclaration" (1:0)
-      value: Node "InstantiationExpression" (1:5)
+      value: Node "FunctionCallExpression" (1:5)
         id: Node "Identifier" (1:5)
           name: "Foo"
         params: Array [
@@ -161,7 +161,7 @@ exports[`parses main declaration 3`] = `
 Node "Program" (1:0)
   body: Array [
     Node "MainDeclaration" (1:0)
-      value: Node "InstantiationExpression" (1:5)
+      value: Node "FunctionCallExpression" (1:5)
         id: Node "Identifier" (1:5)
           name: "Foo"
         params: Array [
@@ -173,7 +173,7 @@ Node "Program" (1:0)
 
 exports[`parses main declaration 4`] = `"Syntax error: duplicate keyword \\"main\\" at 2:0"`;
 
-exports[`parses main declaration 5`] = `"Expected Identifier or InstantiationExpression, but got AssignmentExpression"`;
+exports[`parses main declaration 5`] = `"Expected Identifier or FunctionCallExpression, but got AssignmentExpression"`;
 
 exports[`parses math expression 1`] = `
 Node "Program" (1:0)
@@ -231,7 +231,7 @@ Node "Program" (1:0)
           ],
     Node "TypeDeclaration" (3:0)
       value: Node "AssignmentExpression" (3:5)
-        left: Node "ParameterExpression" (3:5)
+        left: Node "TypeParameterExpression" (3:5)
           id: Node "Identifier" (3:5)
             name: "Maybe"
           params: Array [
@@ -249,7 +249,7 @@ Node "Program" (1:0)
       value: Node "AssignmentExpression" (4:5)
         left: Node "Identifier" (4:5)
           name: "Users"
-        right: Node "InstantiationExpression" (4:13)
+        right: Node "TypeInstantiationExpression" (4:13)
           id: Node "Identifier" (4:13)
             name: "List"
           params: Array [
@@ -259,4 +259,4 @@ Node "Program" (1:0)
   ]
 `;
 
-exports[`parses type declaration 2`] = `"Expected Identifier or InstantiationExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;
+exports[`parses type declaration 2`] = `"Expected Identifier or TypeInstantiationExpression or UnionOperation or StringLiteral or NumericLiteral, but got MathExpression"`;
