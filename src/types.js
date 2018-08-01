@@ -37,7 +37,7 @@ const Identifier = helper('Identifier', ({ name }: { name: string }) => ({
 }));
 
 const MainDeclaration = helper('MainDeclaration', ({ value }: *) => {
-  assert(value, Identifier, FunctionCallExpression);
+  assert(value, FunctionCallExpression);
 
   return {
     value,
@@ -80,7 +80,7 @@ const LetDeclaration = helper('LetDeclaration', ({ value }: *) => {
 
 const FunctionDeclaration = helper('FunctionDeclaration', ({ value }: *) => {
   assert(value, AssignmentExpression);
-  assert(value.left, Identifier, FunctionParameterExpression);
+  assert(value.left, FunctionParameterExpression);
   assert(
     value.right,
     Identifier,

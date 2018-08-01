@@ -12,32 +12,26 @@ expect.addSnapshotSerializer({
 it('parses main declaration', () => {
   expect(
     parse(dedent`
-    main Foo
+    main foo()
     `)
   ).toMatchSnapshot();
 
   expect(
     parse(dedent`
-    main Foo Bar
-    `)
-  ).toMatchSnapshot();
-
-  expect(
-    parse(dedent`
-    main Foo Bar
+    main foo(bar)
     `)
   ).toMatchSnapshot();
 
   expect(() =>
     parse(dedent`
-    main Foo
-    main Bar
+    main foo()
+    main bar()
     `)
   ).toThrowErrorMatchingSnapshot();
 
   expect(() =>
     parse(dedent`
-    main Foo = 42
+    main foo = 42
     `)
   ).toThrowErrorMatchingSnapshot();
 });
@@ -47,8 +41,8 @@ it('parses type declaration', () => {
     parse(dedent`
     type Foo = Bar
     type Bar = Boolean | String | Number | "foo" | 42
-    type Maybe Number = Nothing | Number
-    type Users = List User
+    type Maybe<Number> = Nothing | Number
+    type Users = List<User>
     `)
   ).toMatchSnapshot();
 
@@ -83,45 +77,51 @@ it('parses let declaration', () => {
 it('parses function declaration', () => {
   expect(
     parse(dedent`
-    fun calc a b c = a + b * c
-    fun foo a add = add a
-    fun foo = show "hello world"
+    fun calc(a, b, c) = a + b * c
+    fun foo(a, add) = add(a)
+    fun foo() = show("hello world")
   `)
   ).toMatchSnapshot();
 
   expect(
     parse(dedent`
-    fun add a b = {
+    fun add(a, b) = {
       let c = a + b
 
       return c
     }
 
-    fun foo = add 3 4
+    fun foo() = add(3, 4)
   `)
   ).toMatchSnapshot();
 
   expect(() =>
     parse(dedent`
-    fun foo "hello world" = show test
+    fun foo = "Hello world"
     `)
   ).toThrowErrorMatchingSnapshot();
 
   expect(() =>
     parse(dedent`
-    fun foo = bar | baz
+    fun foo("hello world") = test
     `)
   ).toThrowErrorMatchingSnapshot();
 
   expect(() =>
     parse(dedent`
-    fun foo = {
+    fun foo() = bar | baz
     `)
   ).toThrowErrorMatchingSnapshot();
 
   expect(() =>
     parse(dedent`
-    fun foo = {
+    fun foo() = {
+    `)
+  ).toThrowErrorMatchingSnapshot();
+
+  expect(() =>
+    parse(dedent`
+    fun foo() = {
       let a = 3 + 7
 
       return a

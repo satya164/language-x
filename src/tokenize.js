@@ -41,6 +41,24 @@ type Braces = {
   loc: Location,
 };
 
+type Parens = {
+  type: 'parens',
+  value: '(' | ')',
+  loc: Location,
+};
+
+type Angle = {
+  type: 'angle',
+  value: '<' | '>',
+  loc: Location,
+};
+
+type Punctuation = {
+  type: 'punctuation',
+  value: ',',
+  loc: Location,
+};
+
 type Whitespace = {
   type: 'whitespace',
   value: string,
@@ -60,6 +78,9 @@ type Token =
   | Number
   | String
   | Braces
+  | Parens
+  | Angle
+  | Punctuation
   | Whitespace
   | Newline;
 
@@ -148,6 +169,29 @@ module.exports = function tokenize(
       case '}':
         tokens.push({
           type: 'braces',
+          value: char,
+          loc: { line, column },
+        });
+        break;
+      case '(':
+      case ')':
+        tokens.push({
+          type: 'parens',
+          value: char,
+          loc: { line, column },
+        });
+        break;
+      case '<':
+      case '>':
+        tokens.push({
+          type: 'angle',
+          value: char,
+          loc: { line, column },
+        });
+        break;
+      case ',':
+        tokens.push({
+          type: 'punctuation',
           value: char,
           loc: { line, column },
         });

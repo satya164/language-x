@@ -16,13 +16,13 @@ Sample REPL output:
 ```
 >>> let magic = 42
 undefined
->>> fun wassup a b = {
+>>> fun wassup(a b) = {
 ... let c = a + b + magic
 ...
 ... return c
 ... }
 undefined
->>> main wassup 3 5
+>>> main wassup(3, 5)
 50
 ```
 
@@ -31,10 +31,10 @@ undefined
 A program can have a single `main` declaration as its entry point:
 
 ```
-main App "Hello world"
+main app("Hello world")
 ```
 
-Here we have a function call after the `main` keyword.
+The main declaration needs to be followed by a function call which will start the app.
 
 ## Variables
 
@@ -51,13 +51,13 @@ let bar = "Hello world"
 Functions are defined with the `fun` keyword:
 
 ```
-fun add a b = a + b
+fun add(a, b) = a + b
 ```
 
 Functions can also contain multiple statements:
 
 ```
-fun add a b = {
+fun add(a, b) = {
   let c = a + b
 
   return c
@@ -67,7 +67,7 @@ fun add a b = {
 Functions can be called like:
 
 ```
-let result = add 3 4
+let result = add(3, 4)
 ```
 
 ## Type system (incomplete)
@@ -81,16 +81,16 @@ type Bar = Boolean | Number
 The `Maybe` type represents an optional type, which can be visualized as:
 
 ```
-type Maybe Number = Nothing | Number
+type Maybe<Number> = Nothing | Number
 ```
 
 The `Record` and `List` types need extra metadata when being used:
 
 ```
-type Users = List User
+type Users = List<User>
 
-type User = Record {
+type User = Record<{
   name: String,
   age: Number,
-}
+}>
 ```

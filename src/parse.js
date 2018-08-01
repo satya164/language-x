@@ -113,68 +113,77 @@ const expression = (token, peek, back) => {
       );
     } else if (token.type === 'identifier') {
       expr = Identifier.create({ name: token.value }, token.loc);
-    } else {
-      throw error(token);
     }
 
     // Look at previous token to determine if it's a call expression or parameter expression
     // If it was started after type, fun, it's a parameter expression
     if (
-      prev &&
-      prev.type === 'keyword' &&
-      (prev.value === 'type' || prev.value === 'fun')
+      prev.value === 'type' &&
+      next &&
+      next.type === 'angle' &&
+      next.value === '<'
     ) {
-      if (prev.value === 'type') {
-        while (next && next.type === 'identifier') {
-          // If the identifier is followed by more identifiers, it's parameter expression
-          // For the first identifier, create our expression node
-          // For later identifiers, add them to params
-          expr = TypeParameterExpression.check(expr)
-            ? expr
-            : TypeParameterExpression.create(
-                { id: expr, params: [] },
-                token.loc
-              );
+      expr = TypeParameterExpression.create(
+        { id: expr, params: [] },
+        token.loc
+      );
 
-          expr.params.push(Identifier.create({ name: next.value }, next.loc));
+      next = peek();
 
+      while (next && next.type === 'identifier') {
+        expr.params.push(Identifier.create({ name: next.value }, next.loc));
+
+        next = peek();
+
+        if (next && next.type === 'punctuation' && next.value === ',') {
           next = peek();
+        } else {
+          break;
         }
-      } else if (prev.value === 'fun') {
-        while (next && next.type === 'identifier') {
-          // If the identifier is followed by more identifiers, it's parameter expression
-          // For the first identifier, create our expression node
-          // For later identifiers, add them to params
-          expr = FunctionParameterExpression.check(expr)
-            ? expr
-            : FunctionParameterExpression.create(
-                { id: expr, params: [] },
-                token.loc
-              );
+      }
 
-          expr.params.push(Identifier.create({ name: next.value }, next.loc));
-
-          next = peek();
-        }
+      if (next && next.type === 'angle' && next.value === '>') {
+        next = peek();
+      } else {
+        throw error(next || token);
       }
     } else if (
-      prev && prev.type === 'keyword'
-        ? prev.value === 'main' || prev.value === 'return'
-        : true
+      prev.value === 'fun' &&
+      next &&
+      next.type === 'parens' &&
+      next.value === '('
     ) {
-      let times = 0;
-      let old = prev;
+      expr = FunctionParameterExpression.create(
+        { id: expr, params: [] },
+        token.loc
+      );
 
-      // Look back to determine if it's a type instantiation or a function call
-      while (old && old.type !== 'keyword' && old.type !== 'braces') {
-        old = back();
-        times++;
+      next = peek();
+
+      while (next && next.type === 'identifier') {
+        expr.params.push(Identifier.create({ name: next.value }, next.loc));
+
+        next = peek();
+
+        if (next && next.type === 'punctuation' && next.value === ',') {
+          next = peek();
+        } else {
+          break;
+        }
       }
 
-      // Restore the index
-      while (times--) {
-        peek();
+      if (next && next.type === 'parens' && next.value === ')') {
+        next = peek();
+      } else {
+        throw error(next || token);
       }
+    } else if (next && next.type === 'angle' && next.value === '<') {
+      expr = TypeInstantiationExpression.create(
+        { id: expr, params: [] },
+        token.loc
+      );
+
+      next = peek();
 
       while (
         next &&
@@ -182,24 +191,46 @@ const expression = (token, peek, back) => {
           next.type === 'string' ||
           next.type === 'number')
       ) {
-        // For the first identifier, create our expression node
-        // For later identifiers or literals, add them to params
-        if (old && old.type === 'keyword' && old.value === 'type') {
-          expr = TypeInstantiationExpression.check(expr)
-            ? expr
-            : TypeInstantiationExpression.create(
-                { id: expr, params: [] },
-                token.loc
-              );
-        } else {
-          expr = FunctionCallExpression.check(expr)
-            ? expr
-            : FunctionCallExpression.create(
-                { id: expr, params: [] },
-                token.loc
-              );
+        let node;
+
+        if (next.type === 'string') {
+          node = StringLiteral.create({ value: next.value }, next.loc);
+        } else if (token.type === 'number') {
+          node = NumericLiteral.create(
+            { value: parseFloat(next.value) },
+            next.loc
+          );
+        } else if (next.type === 'identifier') {
+          node = Identifier.create({ name: next.value }, next.loc);
         }
 
+        expr.params.push(node);
+
+        next = peek();
+
+        if (next && next.type === 'punctuation' && next.value === ',') {
+          next = peek();
+        } else {
+          break;
+        }
+      }
+
+      if (next && next.type === 'angle' && next.value === '>') {
+        next = peek();
+      } else {
+        throw error(next || token);
+      }
+    } else if (next && next.type === 'parens' && next.value === '(') {
+      expr = FunctionCallExpression.create({ id: expr, params: [] }, token.loc);
+
+      next = peek();
+
+      while (
+        next &&
+        (next.type === 'identifier' ||
+          next.type === 'string' ||
+          next.type === 'number')
+      ) {
         let node;
 
         if (next.type === 'string') {
@@ -216,9 +247,19 @@ const expression = (token, peek, back) => {
         expr.params.push(node);
 
         next = peek();
+
+        if (next && next.type === 'punctuation' && next.value === ',') {
+          next = peek();
+        } else {
+          break;
+        }
       }
-    } else {
-      error(token);
+
+      if (next && next.type === 'parens' && next.value === ')') {
+        next = peek();
+      } else {
+        throw error(next || token);
+      }
     }
 
     if (next && next.type === 'operator') {
